@@ -1,0 +1,79 @@
+﻿@model GardenArt.Controllers.MailerModel
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutTwoColumn.cshtml";
+    ViewBag.Title = "Gardenart Sweden";
+}
+
+@section TopSideNav {
+    <li>Kontakta oss</li>
+}
+
+@section SideNav {
+    <li><a href="~/Contact/Contact">Kontakta Gardenart</a></li>
+    <li><a href="~/Wholesaler/Index">Våra återförsäljare</a></li>
+}
+
+@section Headline {
+
+    <h3>Kontakt</h3>
+
+}
+
+@section ContentLeft {
+
+    @using (Html.BeginForm())
+    {
+
+      @Html.AntiForgeryToken()
+       @Html.ValidationSummary(true)
+    <!--    <div class="row">
+            <div class="large-12 columns"> -->
+        
+        <fieldset>
+                <label>
+
+                    Namn<br />
+                    <span style="color:red">
+                        @Html.ValidationMessageFor(m => m.name)</span>
+                        @Html.EditorFor(m => m.name, new { id = "name" })
+</label>
+                <label>
+                    Epost<br />
+                    <span style="color:red">
+                        @Html.ValidationMessageFor(m => m.email)</span>
+                        @Html.EditorFor(m => m.email, new { id = "email" })
+
+</label>
+                <label>
+                    Telefon<br />
+                    <span style="color:red">
+                        @Html.ValidationMessageFor(m => m.phone)</span>
+                        @Html.EditorFor(m => m.phone, new { id = "phone" })
+</label>
+                <label>
+                    Meddelande<br />
+                   <span style="color:red"> @Html.ValidationMessageFor(m => m.message)</span>
+                    @Html.TextAreaFor(m => m.message, new { id = "message" })   
+                </label>
+            <input id="submitbutton" type="submit" value="Skicka meddelande!" /> 
+        <!--     </div> -->
+            <p id="callbackmessage"></p>
+     <!--    </div>-->
+</fieldset>
+
+    }
+
+
+    }
+
+    @section ContentRight {
+
+        <img src="~/Images/Site/15.png" style="margin-top:20px;" />
+
+    }
+
+    @section Scripts
+    {
+      @Scripts.Render("~/bundles/jqueryval")
+    }

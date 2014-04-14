@@ -1,0 +1,63 @@
+﻿@model GardenArt.ViewModels.CollectionDisplayViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutOneColumn.cshtml";
+    Page.Title = "Gardenart Sweden";
+}
+
+
+@section SideNavTop {
+    <li>Kollektioner</li>
+}
+
+@section SideNav {
+
+    @foreach (var item in Model.ListOfCollections)
+    {
+        <li>
+            @Html.ActionLink(item.CollectionName, "Collection", new { id = item.CollectionID })
+        </li>
+    }
+
+}
+
+@section MobileNav {
+    <dl class="sub-nav">
+        @foreach (var item in Model.ListOfCollections)
+        {
+            <dd>
+                @Html.ActionLink(item.CollectionName, "Collection", new { id = item.CollectionID })
+            </dd>
+        }
+
+    </dl>
+}
+
+@section Headline {
+
+    <h3>@Model.OneCollectionFromID.CollectionName</h3>
+
+}
+
+
+@section Content {
+    <div id="articleimages">
+        <ul class="example-orbit" data-orbit>
+            @foreach (var item in Model.OneCollectionFromID.ImgList)
+            {
+              <li>
+                <img src="@item" style="margin-bottom:20px" />
+             </li>
+            }
+        </ul>
+    </div>
+    
+
+    <p class="another_title">@Model.OneCollectionFromID.CollectionName</p>
+    <p>@Model.OneCollectionFromID.Description </p>
+
+    <a class="button secondary" href="@Url.Action("CollectionView", new { id = Model.OneCollectionFromID.CollectionID  })">
+        Visa alla möbler från kollektionen @Model.OneCollectionFromID.CollectionName
+    </a>
+}

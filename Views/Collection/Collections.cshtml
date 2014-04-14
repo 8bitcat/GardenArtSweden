@@ -1,0 +1,62 @@
+﻿@model GardenArt.ViewModels.CollectionListViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutProduct.cshtml";
+    Page.Title = "Gardenart Sweden";
+}
+
+@section SideNavTop {
+    <li>Kollektioner</li>
+}
+
+@section SideNav {
+
+    @foreach (var item in Model.ListOfCollections)
+    {
+        <li>
+            @Html.ActionLink(item.CollectionName, "Collection", new { id = item.CollectionID })
+        </li>
+    }
+}
+
+@section Headline {
+    <h3>Kollektioner</h3>
+    <p>
+
+        Vi arbetar med aluminium som bas och med olika konstmaterial och härdat glas som accenter. Färgpaletten i grunden är stram i vitt, taupe, mocca, grått och svart och dessa färger går igen i alla våra material, vilket ger näst intill oändliga kombinations- möjligheter, dock med grundfärgerna som sammanhållande faktor.
+    </p>
+}
+@section Content {
+
+    <ul class="small-block-grid-1 medium-block-grid-2">
+
+        @foreach (var item in Model.ListOfCollections)
+        {
+
+            <li>
+
+                <div class="collection_box">
+                   
+
+                   
+                    <div class="collection_image">
+                        <a href="@Url.Action("Collection", new { id = item.CollectionID })">
+                            <img alt="@item.CollectionName" src="@item.ImgUrl" />
+                        </a>
+                    </div>
+
+                    <div class="collection_text">
+                        <span class="collection_name">@Html.ActionLink(item.CollectionName, "Collection", new { id = item.CollectionID })</span>
+                    </div>
+
+                </div>
+
+
+            </li>
+
+
+        }
+
+    </ul>
+}

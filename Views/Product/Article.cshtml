@@ -1,0 +1,88 @@
+﻿@model GardenArt.ViewModels.ArticleDisplayViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutArticle.cshtml";
+    ViewBag.Title = "Gardenart Sweden";
+}
+
+@section Headline {
+
+    <!--ALLA-->
+    <p class="article_collection">
+       <a href="#">@Model.ProductContainer.MotherProduct.ProductName
+        </a>
+    </p>
+    <h3>@Model.ProductContainer.MotherProduct.ProductName</h3>
+
+
+}
+
+@section Images{
+
+    <!-- Orbit -->
+    <div id="articleimages">
+        <ul class="example-orbit" data-orbit>
+            <li>
+                <img src="@Model.ProductContainer.MotherProduct.ImgUrl" />
+            </li>
+        </ul>
+    </div>
+}
+
+
+@section Info{
+
+
+    <p class="another_title">Beskrivning</p>
+    <p>@Model.ProductContainer.MotherProduct.Description</p>
+
+    <p class="another_title">Produktfakta</p>
+    <p class="article_text"> Namn: @Model.ProductContainer.MotherProduct.ProductName</p>
+    <p class="article_text"> Material:
+        @foreach(var item in Model.ProductContainer.MotherProduct.ProductMaterials)
+        {           
+            @item         
+        }
+    
+    </p>
+    <p class="article_text"> Produktmått: @Model.ProductContainer.MotherProduct.ProductSizeWidth X @Model.ProductContainer.MotherProduct.ProductSizeHeight X @Model.ProductContainer.MotherProduct.ProductSizeDepth mm</p>
+    <br />
+
+    <p class="another_title">Varianter</p>
+    <p class="article_text">@Model.ProductContainer.MotherProduct.ProductCategoryTypeDisplay</p>
+
+    <ul class="inline-list">
+        @foreach(var item in Model.ProductContainer.MotherProduct.ProductColors)
+        {
+            <li>
+                <div class="@item"></div>
+            </li>
+            
+        }
+    </ul>
+
+    <p class="article_text">Stomme</p>
+
+    <ul class="inline-list">
+        @foreach (var item in Model.ProductContainer.MotherProduct.ProductFrames)
+        {
+            <li>
+                <div class="@item"></div>
+            </li>
+
+        }
+        
+    </ul>
+
+    @Html.Partial("PartialArticle", @Model)
+
+    <br />
+
+
+}
+
+
+
+
+

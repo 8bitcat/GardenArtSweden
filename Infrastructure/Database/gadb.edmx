@@ -1,0 +1,2126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="gardenartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CategoryTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="tCategoryPicture">
+          <Key>
+            <PropertyRef Name="CategoryPictureID" />
+          </Key>
+          <Property Name="CategoryPictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCategoryType">
+          <Key>
+            <PropertyRef Name="CategoryTypeID" />
+          </Key>
+          <Property Name="CategoryTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCustomer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tFrame">
+          <Key>
+            <PropertyRef Name="FrameID" />
+          </Key>
+          <Property Name="FrameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tFrameColor">
+          <Key>
+            <PropertyRef Name="FrameColorID" />
+          </Key>
+          <Property Name="FrameColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CssName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMaterial">
+          <Key>
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="MaterialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tMaterialColor">
+          <Key>
+            <PropertyRef Name="MaterialColorID" />
+          </Key>
+          <Property Name="MaterialColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CssName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tNewsItem">
+          <Key>
+            <PropertyRef Name="NewsItemID" />
+          </Key>
+          <Property Name="NewsItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tNewsItemPicture">
+          <Key>
+            <PropertyRef Name="NewsItemPictureID" />
+          </Key>
+          <Property Name="NewsItemPictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsItemID" Type="int" Nullable="false" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="OrderStatusID" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="TotalPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOrderStatus">
+          <Key>
+            <PropertyRef Name="OrderStatusID" />
+          </Key>
+          <Property Name="OrderStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tPicture">
+          <Key>
+            <PropertyRef Name="PictureID" />
+          </Key>
+          <Property Name="PictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="SupplierArticleNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GardenArtArticleNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProductSizeWidth" Type="int" Nullable="false" />
+          <Property Name="ProductSizeHeight" Type="int" Nullable="false" />
+          <Property Name="ProductSizeDepth" Type="int" Nullable="false" />
+          <Property Name="PackageInfo" Type="nvarchar" MaxLength="200" />
+          <Property Name="Package" Type="nvarchar" MaxLength="50" />
+          <Property Name="PackageSize" Type="nvarchar" MaxLength="200" />
+          <Property Name="GrossWeight" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="NetWeight" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="ItemsPerContainer" Type="int" Nullable="false" />
+          <Property Name="VolumePerItem" Type="decimal" Precision="18" Scale="10" Nullable="false" />
+          <Property Name="Factory" Type="nvarchar" MaxLength="50" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="50" />
+          <Property Name="CostUSD" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PurchasePriceUSD" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SellingPriceDirectUSD20" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SellingPriceDirectUSD10" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SellingPriceWarehouseSEK" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FrameID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="SellingPriceConsumerSEK" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FrameColorID" Type="int" />
+          <Property Name="MaterialColorID" Type="int" />
+          <Property Name="ProductSizeInfo" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tProductAttribute">
+          <Key>
+            <PropertyRef Name="ProductAttributeID" />
+          </Key>
+          <Property Name="ProductAttributeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tProductAttributeValue">
+          <Key>
+            <PropertyRef Name="ProductAttributeValueID" />
+          </Key>
+          <Property Name="ProductAttributeValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductAttributeID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tProductGroup">
+          <Key>
+            <PropertyRef Name="ProductGroupID" />
+          </Key>
+          <Property Name="ProductGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProductGroupDetail">
+          <Key>
+            <PropertyRef Name="ProductGroupDetailID" />
+          </Key>
+          <Property Name="ProductGroupDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductGroupID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProductGroupPicture">
+          <Key>
+            <PropertyRef Name="ProductGroupPictureID" />
+          </Key>
+          <Property Name="ProductGroupPictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductGroupID" Type="int" Nullable="false" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProductMaterial">
+          <Key>
+            <PropertyRef Name="ProductMaterialID" />
+          </Key>
+          <Property Name="ProductMaterialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="MaterialID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProductPicture">
+          <Key>
+            <PropertyRef Name="ProductPictureID" />
+          </Key>
+          <Property Name="ProductPictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSet">
+          <Key>
+            <PropertyRef Name="SetID" />
+          </Key>
+          <Property Name="SetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tSetDetail">
+          <Key>
+            <PropertyRef Name="SetDetailID" />
+          </Key>
+          <Property Name="SetDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SetID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tSetPicture">
+          <Key>
+            <PropertyRef Name="SetPictureID" />
+          </Key>
+          <Property Name="SetPictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SetID" Type="int" Nullable="false" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSupplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Homepage" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tWarehouse">
+          <Key>
+            <PropertyRef Name="WarehouseID" />
+          </Key>
+          <Property Name="WarehouseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarehouseLocationID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Ordered" Type="int" Nullable="false" />
+          <Property Name="Available" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tWarehouseLocation">
+          <Key>
+            <PropertyRef Name="WarehouseLocationID" />
+          </Key>
+          <Property Name="WarehouseLocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tCategory_tCategoryType">
+          <End Role="tCategoryType" Type="Self.tCategoryType" Multiplicity="0..1" />
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategoryType">
+              <PropertyRef Name="CategoryTypeID" />
+            </Principal>
+            <Dependent Role="tCategory">
+              <PropertyRef Name="CategoryTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCategoryPicture_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="1" />
+          <End Role="tCategoryPicture" Type="Self.tCategoryPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tCategoryPicture">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCategoryPicture_tPicture">
+          <End Role="tPicture" Type="Self.tPicture" Multiplicity="1" />
+          <End Role="tCategoryPicture" Type="Self.tCategoryPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tCategoryPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNewsItemPicture_tNewsItem">
+          <End Role="tNewsItem" Type="Self.tNewsItem" Multiplicity="1" />
+          <End Role="tNewsItemPicture" Type="Self.tNewsItemPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNewsItem">
+              <PropertyRef Name="NewsItemID" />
+            </Principal>
+            <Dependent Role="tNewsItemPicture">
+              <PropertyRef Name="NewsItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNewsItemPicture_tPicture">
+          <End Role="tPicture" Type="Self.tPicture" Multiplicity="1" />
+          <End Role="tNewsItemPicture" Type="Self.tNewsItemPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tNewsItemPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tCustomer">
+          <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tOrderStatus">
+          <End Role="tOrderStatus" Type="Self.tOrderStatus" Multiplicity="1" />
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrderStatus">
+              <PropertyRef Name="OrderStatusID" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="OrderStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderDetail_tOrder">
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tFrame">
+          <End Role="tFrame" Type="Self.tFrame" Multiplicity="0..1" />
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFrame">
+              <PropertyRef Name="FrameID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="FrameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tFrameColor">
+          <End Role="tFrameColor" Type="Self.tFrameColor" Multiplicity="0..1" />
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFrameColor">
+              <PropertyRef Name="FrameColorID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="FrameColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tMaterialColor">
+          <End Role="tMaterialColor" Type="Self.tMaterialColor" Multiplicity="0..1" />
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaterialColor">
+              <PropertyRef Name="MaterialColorID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="MaterialColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tSupplier">
+          <End Role="tSupplier" Type="Self.tSupplier" Multiplicity="0..1" />
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSupplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductAttributeValue_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductAttributeValue" Type="Self.tProductAttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductAttributeValue">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductAttributeValue_tProductAttribute">
+          <End Role="tProductAttribute" Type="Self.tProductAttribute" Multiplicity="1" />
+          <End Role="tProductAttributeValue" Type="Self.tProductAttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProductAttribute">
+              <PropertyRef Name="ProductAttributeID" />
+            </Principal>
+            <Dependent Role="tProductAttributeValue">
+              <PropertyRef Name="ProductAttributeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductGroupDetail" Type="Self.tProductGroupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductGroupDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupDetail_tProductGroup">
+          <End Role="tProductGroup" Type="Self.tProductGroup" Multiplicity="1" />
+          <End Role="tProductGroupDetail" Type="Self.tProductGroupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProductGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Principal>
+            <Dependent Role="tProductGroupDetail">
+              <PropertyRef Name="ProductGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupPicture_tPicture">
+          <End Role="tPicture" Type="Self.tPicture" Multiplicity="1" />
+          <End Role="tProductGroupPicture" Type="Self.tProductGroupPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tProductGroupPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupPicture_tProductGroup">
+          <End Role="tProductGroup" Type="Self.tProductGroup" Multiplicity="1" />
+          <End Role="tProductGroupPicture" Type="Self.tProductGroupPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProductGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Principal>
+            <Dependent Role="tProductGroupPicture">
+              <PropertyRef Name="ProductGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductMaterial_tMaterial">
+          <End Role="tMaterial" Type="Self.tMaterial" Multiplicity="1" />
+          <End Role="tProductMaterial" Type="Self.tProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaterial">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="tProductMaterial">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductMaterial_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductMaterial" Type="Self.tProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductMaterial">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductPicture_tPicture">
+          <End Role="tPicture" Type="Self.tPicture" Multiplicity="1" />
+          <End Role="tProductPicture" Type="Self.tProductPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tProductPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductPicture_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductPicture" Type="Self.tProductPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductPicture">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tSetDetail" Type="Self.tSetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tSetDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetDetail_tSet">
+          <End Role="tSet" Type="Self.tSet" Multiplicity="1" />
+          <End Role="tSetDetail" Type="Self.tSetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSet">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="tSetDetail">
+              <PropertyRef Name="SetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetPicture_tPicture">
+          <End Role="tPicture" Type="Self.tPicture" Multiplicity="1" />
+          <End Role="tSetPicture" Type="Self.tSetPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tSetPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetPicture_tSet">
+          <End Role="tSet" Type="Self.tSet" Multiplicity="1" />
+          <End Role="tSetPicture" Type="Self.tSetPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSet">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="tSetPicture">
+              <PropertyRef Name="SetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWarehouse_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tWarehouse">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWarehouse_tWarehouseLocation">
+          <End Role="tWarehouseLocation" Type="Self.tWarehouseLocation" Multiplicity="1" />
+          <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseLocation">
+              <PropertyRef Name="WarehouseLocationID" />
+            </Principal>
+            <Dependent Role="tWarehouse">
+              <PropertyRef Name="WarehouseLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="gardenartModelStoreContainer">
+          <EntitySet Name="tCategory" EntityType="Self.tCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCategoryPicture" EntityType="Self.tCategoryPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCategoryType" EntityType="Self.tCategoryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomer" EntityType="Self.tCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFrame" EntityType="Self.tFrame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFrameColor" EntityType="Self.tFrameColor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMaterial" EntityType="Self.tMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMaterialColor" EntityType="Self.tMaterialColor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNewsItem" EntityType="Self.tNewsItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNewsItemPicture" EntityType="Self.tNewsItemPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderStatus" EntityType="Self.tOrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPicture" EntityType="Self.tPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductAttribute" EntityType="Self.tProductAttribute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductAttributeValue" EntityType="Self.tProductAttributeValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductGroup" EntityType="Self.tProductGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductGroupDetail" EntityType="Self.tProductGroupDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductGroupPicture" EntityType="Self.tProductGroupPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductMaterial" EntityType="Self.tProductMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductPicture" EntityType="Self.tProductPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSet" EntityType="Self.tSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSetDetail" EntityType="Self.tSetDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSetPicture" EntityType="Self.tSetPicture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSupplier" EntityType="Self.tSupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tWarehouse" EntityType="Self.tWarehouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tWarehouseLocation" EntityType="Self.tWarehouseLocation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tCategory_tCategoryType" Association="Self.FK_tCategory_tCategoryType">
+            <End Role="tCategoryType" EntitySet="tCategoryType" />
+            <End Role="tCategory" EntitySet="tCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCategoryPicture_tCategory" Association="Self.FK_tCategoryPicture_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tCategoryPicture" EntitySet="tCategoryPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCategoryPicture_tPicture" Association="Self.FK_tCategoryPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tCategoryPicture" EntitySet="tCategoryPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNewsItemPicture_tNewsItem" Association="Self.FK_tNewsItemPicture_tNewsItem">
+            <End Role="tNewsItem" EntitySet="tNewsItem" />
+            <End Role="tNewsItemPicture" EntitySet="tNewsItemPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNewsItemPicture_tPicture" Association="Self.FK_tNewsItemPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tNewsItemPicture" EntitySet="tNewsItemPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tCustomer" Association="Self.FK_tOrder_tCustomer">
+            <End Role="tCustomer" EntitySet="tCustomer" />
+            <End Role="tOrder" EntitySet="tOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tOrderStatus" Association="Self.FK_tOrder_tOrderStatus">
+            <End Role="tOrderStatus" EntitySet="tOrderStatus" />
+            <End Role="tOrder" EntitySet="tOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
+            <End Role="tOrder" EntitySet="tOrder" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderDetail_tProduct" Association="Self.FK_tOrderDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tCategory" Association="Self.FK_tProduct_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tFrame" Association="Self.FK_tProduct_tFrame">
+            <End Role="tFrame" EntitySet="tFrame" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tFrameColor" Association="Self.FK_tProduct_tFrameColor">
+            <End Role="tFrameColor" EntitySet="tFrameColor" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tMaterialColor" Association="Self.FK_tProduct_tMaterialColor">
+            <End Role="tMaterialColor" EntitySet="tMaterialColor" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tSupplier" Association="Self.FK_tProduct_tSupplier">
+            <End Role="tSupplier" EntitySet="tSupplier" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductAttributeValue_tProduct" Association="Self.FK_tProductAttributeValue_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductAttributeValue" EntitySet="tProductAttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductAttributeValue_tProductAttribute" Association="Self.FK_tProductAttributeValue_tProductAttribute">
+            <End Role="tProductAttribute" EntitySet="tProductAttribute" />
+            <End Role="tProductAttributeValue" EntitySet="tProductAttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupDetail_tProduct" Association="Self.FK_tProductGroupDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductGroupDetail" EntitySet="tProductGroupDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupDetail_tProductGroup" Association="Self.FK_tProductGroupDetail_tProductGroup">
+            <End Role="tProductGroup" EntitySet="tProductGroup" />
+            <End Role="tProductGroupDetail" EntitySet="tProductGroupDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupPicture_tPicture" Association="Self.FK_tProductGroupPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tProductGroupPicture" EntitySet="tProductGroupPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupPicture_tProductGroup" Association="Self.FK_tProductGroupPicture_tProductGroup">
+            <End Role="tProductGroup" EntitySet="tProductGroup" />
+            <End Role="tProductGroupPicture" EntitySet="tProductGroupPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductMaterial_tMaterial" Association="Self.FK_tProductMaterial_tMaterial">
+            <End Role="tMaterial" EntitySet="tMaterial" />
+            <End Role="tProductMaterial" EntitySet="tProductMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductMaterial_tProduct" Association="Self.FK_tProductMaterial_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductMaterial" EntitySet="tProductMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductPicture_tPicture" Association="Self.FK_tProductPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tProductPicture" EntitySet="tProductPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductPicture_tProduct" Association="Self.FK_tProductPicture_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductPicture" EntitySet="tProductPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetDetail_tProduct" Association="Self.FK_tSetDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tSetDetail" EntitySet="tSetDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetDetail_tSet" Association="Self.FK_tSetDetail_tSet">
+            <End Role="tSet" EntitySet="tSet" />
+            <End Role="tSetDetail" EntitySet="tSetDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetPicture_tPicture" Association="Self.FK_tSetPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tSetPicture" EntitySet="tSetPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetPicture_tSet" Association="Self.FK_tSetPicture_tSet">
+            <End Role="tSet" EntitySet="tSet" />
+            <End Role="tSetPicture" EntitySet="tSetPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tWarehouse" EntitySet="tWarehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWarehouse_tWarehouseLocation" Association="Self.FK_tWarehouse_tWarehouseLocation">
+            <End Role="tWarehouseLocation" EntitySet="tWarehouseLocation" />
+            <End Role="tWarehouse" EntitySet="tWarehouse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gardenartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="p_ga_getPicturesByItemAndType" ReturnType="Collection(gardenartModel.p_ga_getPicturesByItemAndType_Result)">
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+            <Parameter Name="ItemTypeName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(gardenartModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(gardenartModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="p_ga_getProductById" ReturnType="Collection(gardenartModel.p_ga_getProductById_Result)">
+          <Parameter Name="ProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tCategory" EntityType="gardenartModel.tCategory" />
+          <EntitySet Name="tCategoryPicture" EntityType="gardenartModel.tCategoryPicture" />
+          <EntitySet Name="tCustomer" EntityType="gardenartModel.tCustomer" />
+          <EntitySet Name="tMaterial" EntityType="gardenartModel.tMaterial" />
+          <EntitySet Name="tOrder" EntityType="gardenartModel.tOrder" />
+          <EntitySet Name="tOrderDetail" EntityType="gardenartModel.tOrderDetail" />
+          <EntitySet Name="tOrderStatus" EntityType="gardenartModel.tOrderStatus" />
+          <EntitySet Name="tPicture" EntityType="gardenartModel.tPicture" />
+          <EntitySet Name="tProductAttribute" EntityType="gardenartModel.tProductAttribute" />
+          <EntitySet Name="tProductAttributeValue" EntityType="gardenartModel.tProductAttributeValue" />
+          <EntitySet Name="tProductPicture" EntityType="gardenartModel.tProductPicture" />
+          <EntitySet Name="tSet" EntityType="gardenartModel.tSet" />
+          <EntitySet Name="tSetDetail" EntityType="gardenartModel.tSetDetail" />
+          <EntitySet Name="tSetPicture" EntityType="gardenartModel.tSetPicture" />
+          <AssociationSet Name="FK_tCategoryPicture_tCategory" Association="gardenartModel.FK_tCategoryPicture_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tCategoryPicture" EntitySet="tCategoryPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCategoryPicture_tPicture" Association="gardenartModel.FK_tCategoryPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tCategoryPicture" EntitySet="tCategoryPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tCustomer" Association="gardenartModel.FK_tOrder_tCustomer">
+            <End Role="tCustomer" EntitySet="tCustomer" />
+            <End Role="tOrder" EntitySet="tOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tOrderStatus" Association="gardenartModel.FK_tOrder_tOrderStatus">
+            <End Role="tOrderStatus" EntitySet="tOrderStatus" />
+            <End Role="tOrder" EntitySet="tOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderDetail_tOrder" Association="gardenartModel.FK_tOrderDetail_tOrder">
+            <End Role="tOrder" EntitySet="tOrder" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductPicture_tPicture" Association="gardenartModel.FK_tProductPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tProductPicture" EntitySet="tProductPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetPicture_tPicture" Association="gardenartModel.FK_tSetPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tSetPicture" EntitySet="tSetPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductAttributeValue_tProductAttribute" Association="gardenartModel.FK_tProductAttributeValue_tProductAttribute">
+            <End Role="tProductAttribute" EntitySet="tProductAttribute" />
+            <End Role="tProductAttributeValue" EntitySet="tProductAttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetDetail_tSet" Association="gardenartModel.FK_tSetDetail_tSet">
+            <End Role="tSet" EntitySet="tSet" />
+            <End Role="tSetDetail" EntitySet="tSetDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetPicture_tSet" Association="gardenartModel.FK_tSetPicture_tSet">
+            <End Role="tSet" EntitySet="tSet" />
+            <End Role="tSetPicture" EntitySet="tSetPicture" />
+          </AssociationSet>
+          <EntitySet Name="tNewsItem" EntityType="gardenartModel.tNewsItem" />
+          <EntitySet Name="tNewsItemPicture" EntityType="gardenartModel.tNewsItemPicture" />
+          <AssociationSet Name="FK_tNewsItemPicture_tNewsItem" Association="gardenartModel.FK_tNewsItemPicture_tNewsItem">
+            <End Role="tNewsItem" EntitySet="tNewsItem" />
+            <End Role="tNewsItemPicture" EntitySet="tNewsItemPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNewsItemPicture_tPicture" Association="gardenartModel.FK_tNewsItemPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tNewsItemPicture" EntitySet="tNewsItemPicture" />
+          </AssociationSet>
+          <EntitySet Name="tFrame" EntityType="gardenartModel.tFrame" />
+          <EntitySet Name="tSupplier" EntityType="gardenartModel.tSupplier" />
+          <EntitySet Name="tWarehouse" EntityType="gardenartModel.tWarehouse" />
+          <EntitySet Name="tWarehouseLocation" EntityType="gardenartModel.tWarehouseLocation" />
+          <AssociationSet Name="FK_tWarehouse_tWarehouseLocation" Association="gardenartModel.FK_tWarehouse_tWarehouseLocation">
+            <End Role="tWarehouseLocation" EntitySet="tWarehouseLocation" />
+            <End Role="tWarehouse" EntitySet="tWarehouse" />
+          </AssociationSet>
+          <EntitySet Name="tFrameColor" EntityType="gardenartModel.tFrameColor" />
+          <EntitySet Name="tMaterialColor" EntityType="gardenartModel.tMaterialColor" />
+          <EntitySet Name="tProductGroup" EntityType="gardenartModel.tProductGroup" />
+          <EntitySet Name="tProductGroupDetail" EntityType="gardenartModel.tProductGroupDetail" />
+          <EntitySet Name="tProductGroupPicture" EntityType="gardenartModel.tProductGroupPicture" />
+          <AssociationSet Name="FK_tProductGroupPicture_tPicture" Association="gardenartModel.FK_tProductGroupPicture_tPicture">
+            <End Role="tPicture" EntitySet="tPicture" />
+            <End Role="tProductGroupPicture" EntitySet="tProductGroupPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupDetail_tProductGroup" Association="gardenartModel.FK_tProductGroupDetail_tProductGroup">
+            <End Role="tProductGroup" EntitySet="tProductGroup" />
+            <End Role="tProductGroupDetail" EntitySet="tProductGroupDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupPicture_tProductGroup" Association="gardenartModel.FK_tProductGroupPicture_tProductGroup">
+            <End Role="tProductGroup" EntitySet="tProductGroup" />
+            <End Role="tProductGroupPicture" EntitySet="tProductGroupPicture" />
+          </AssociationSet>
+          <EntitySet Name="tCategoryType" EntityType="gardenartModel.tCategoryType" />
+          <AssociationSet Name="FK_tCategory_tCategoryType" Association="gardenartModel.FK_tCategory_tCategoryType">
+            <End Role="tCategoryType" EntitySet="tCategoryType" />
+            <End Role="tCategory" EntitySet="tCategory" />
+          </AssociationSet>
+          <EntitySet Name="tProductMaterial" EntityType="gardenartModel.tProductMaterial" />
+          <AssociationSet Name="FK_tProductMaterial_tMaterial" Association="gardenartModel.FK_tProductMaterial_tMaterial">
+            <End Role="tMaterial" EntitySet="tMaterial" />
+            <End Role="tProductMaterial" EntitySet="tProductMaterial" />
+          </AssociationSet>
+          <EntitySet Name="tProduct" EntityType="gardenartModel.tProduct" />
+          <AssociationSet Name="FK_tProduct_tCategory" Association="gardenartModel.FK_tProduct_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tFrame" Association="gardenartModel.FK_tProduct_tFrame">
+            <End Role="tFrame" EntitySet="tFrame" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tFrameColor" Association="gardenartModel.FK_tProduct_tFrameColor">
+            <End Role="tFrameColor" EntitySet="tFrameColor" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tMaterialColor" Association="gardenartModel.FK_tProduct_tMaterialColor">
+            <End Role="tMaterialColor" EntitySet="tMaterialColor" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderDetail_tProduct" Association="gardenartModel.FK_tOrderDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tSupplier" Association="gardenartModel.FK_tProduct_tSupplier">
+            <End Role="tSupplier" EntitySet="tSupplier" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductAttributeValue_tProduct" Association="gardenartModel.FK_tProductAttributeValue_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductAttributeValue" EntitySet="tProductAttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductGroupDetail_tProduct" Association="gardenartModel.FK_tProductGroupDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductGroupDetail" EntitySet="tProductGroupDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductMaterial_tProduct" Association="gardenartModel.FK_tProductMaterial_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductMaterial" EntitySet="tProductMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductPicture_tProduct" Association="gardenartModel.FK_tProductPicture_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductPicture" EntitySet="tProductPicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSetDetail_tProduct" Association="gardenartModel.FK_tSetDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tSetDetail" EntitySet="tSetDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWarehouse_tProduct" Association="gardenartModel.FK_tWarehouse_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tWarehouse" EntitySet="tWarehouse" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="p_ga_getPicturesByItemAndType_Result">
+          <Property Type="Int32" Name="PictureID" Nullable="false" />
+          <Property Type="String" Name="Picture" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="p_ga_getProductById_Result">
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="ItemNumber" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="FobGuangzhouUSD" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="Quantity40GP" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Picture" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <EntityType Name="tCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCategoryPicture" Relationship="gardenartModel.FK_tCategoryPicture_tCategory" FromRole="tCategory" ToRole="tCategoryPicture" />
+          <Property Name="CategoryTypeID" Type="Int32" />
+          <NavigationProperty Name="tCategoryType" Relationship="gardenartModel.FK_tCategory_tCategoryType" FromRole="tCategory" ToRole="tCategoryType" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProduct_tCategory" FromRole="tCategory" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tCategoryPicture">
+          <Key>
+            <PropertyRef Name="CategoryPictureID" />
+          </Key>
+          <Property Name="CategoryPictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="PictureID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tCategory" Relationship="gardenartModel.FK_tCategoryPicture_tCategory" FromRole="tCategoryPicture" ToRole="tCategory" />
+          <NavigationProperty Name="tPicture" Relationship="gardenartModel.FK_tCategoryPicture_tPicture" FromRole="tCategoryPicture" ToRole="tPicture" />
+        </EntityType>
+        <EntityType Name="tCustomer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tOrder" Relationship="gardenartModel.FK_tOrder_tCustomer" FromRole="tCustomer" ToRole="tOrder" />
+        </EntityType>
+        <EntityType Name="tMaterial">
+          <Key>
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="MaterialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductMaterial" Relationship="gardenartModel.FK_tProductMaterial_tMaterial" FromRole="tMaterial" ToRole="tProductMaterial" />
+        </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatusID" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCustomer" Relationship="gardenartModel.FK_tOrder_tCustomer" FromRole="tOrder" ToRole="tCustomer" />
+          <NavigationProperty Name="tOrderStatus" Relationship="gardenartModel.FK_tOrder_tOrderStatus" FromRole="tOrder" ToRole="tOrderStatus" />
+          <NavigationProperty Name="tOrderDetail" Relationship="gardenartModel.FK_tOrderDetail_tOrder" FromRole="tOrder" ToRole="tOrderDetail" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="tOrder" Relationship="gardenartModel.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tOrderStatus">
+          <Key>
+            <PropertyRef Name="OrderStatusID" />
+          </Key>
+          <Property Name="OrderStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tOrder" Relationship="gardenartModel.FK_tOrder_tOrderStatus" FromRole="tOrderStatus" ToRole="tOrder" />
+        </EntityType>
+        <EntityType Name="tPicture">
+          <Key>
+            <PropertyRef Name="PictureID" />
+          </Key>
+          <Property Name="PictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Picture" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCategoryPicture" Relationship="gardenartModel.FK_tCategoryPicture_tPicture" FromRole="tPicture" ToRole="tCategoryPicture" />
+          <NavigationProperty Name="tProductPicture" Relationship="gardenartModel.FK_tProductPicture_tPicture" FromRole="tPicture" ToRole="tProductPicture" />
+          <NavigationProperty Name="tSetPicture" Relationship="gardenartModel.FK_tSetPicture_tPicture" FromRole="tPicture" ToRole="tSetPicture" />
+          <NavigationProperty Name="tNewsItemPicture" Relationship="gardenartModel.FK_tNewsItemPicture_tPicture" FromRole="tPicture" ToRole="tNewsItemPicture" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tProductGroupPicture" Relationship="gardenartModel.FK_tProductGroupPicture_tPicture" FromRole="tPicture" ToRole="tProductGroupPicture" />
+        </EntityType>
+        <EntityType Name="tProductAttribute">
+          <Key>
+            <PropertyRef Name="ProductAttributeID" />
+          </Key>
+          <Property Name="ProductAttributeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductAttributeValue" Relationship="gardenartModel.FK_tProductAttributeValue_tProductAttribute" FromRole="tProductAttribute" ToRole="tProductAttributeValue" />
+        </EntityType>
+        <EntityType Name="tProductAttributeValue">
+          <Key>
+            <PropertyRef Name="ProductAttributeValueID" />
+          </Key>
+          <Property Name="ProductAttributeValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductAttributeID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductAttribute" Relationship="gardenartModel.FK_tProductAttributeValue_tProductAttribute" FromRole="tProductAttributeValue" ToRole="tProductAttribute" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProductAttributeValue_tProduct" FromRole="tProductAttributeValue" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tProductPicture">
+          <Key>
+            <PropertyRef Name="ProductPictureID" />
+          </Key>
+          <Property Name="ProductPictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="PictureID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tPicture" Relationship="gardenartModel.FK_tProductPicture_tPicture" FromRole="tProductPicture" ToRole="tPicture" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProductPicture_tProduct" FromRole="tProductPicture" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tSet">
+          <Key>
+            <PropertyRef Name="SetID" />
+          </Key>
+          <Property Name="SetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tSetDetail" Relationship="gardenartModel.FK_tSetDetail_tSet" FromRole="tSet" ToRole="tSetDetail" />
+          <NavigationProperty Name="tSetPicture" Relationship="gardenartModel.FK_tSetPicture_tSet" FromRole="tSet" ToRole="tSetPicture" />
+        </EntityType>
+        <EntityType Name="tSetDetail">
+          <Key>
+            <PropertyRef Name="SetDetailID" />
+          </Key>
+          <Property Name="SetDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SetID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tSet" Relationship="gardenartModel.FK_tSetDetail_tSet" FromRole="tSetDetail" ToRole="tSet" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tSetDetail_tProduct" FromRole="tSetDetail" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tSetPicture">
+          <Key>
+            <PropertyRef Name="SetPictureID" />
+          </Key>
+          <Property Name="SetPictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SetID" Type="Int32" Nullable="false" />
+          <Property Name="PictureID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tPicture" Relationship="gardenartModel.FK_tSetPicture_tPicture" FromRole="tSetPicture" ToRole="tPicture" />
+          <NavigationProperty Name="tSet" Relationship="gardenartModel.FK_tSetPicture_tSet" FromRole="tSetPicture" ToRole="tSet" />
+        </EntityType>
+        <Association Name="FK_tCategoryPicture_tCategory">
+          <End Type="gardenartModel.tCategory" Role="tCategory" Multiplicity="1" />
+          <End Type="gardenartModel.tCategoryPicture" Role="tCategoryPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tCategoryPicture">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCategoryPicture_tPicture">
+          <End Type="gardenartModel.tPicture" Role="tPicture" Multiplicity="1" />
+          <End Type="gardenartModel.tCategoryPicture" Role="tCategoryPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tCategoryPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tCustomer">
+          <End Type="gardenartModel.tCustomer" Role="tCustomer" Multiplicity="1" />
+          <End Type="gardenartModel.tOrder" Role="tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tOrderStatus">
+          <End Type="gardenartModel.tOrderStatus" Role="tOrderStatus" Multiplicity="1" />
+          <End Type="gardenartModel.tOrder" Role="tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrderStatus">
+              <PropertyRef Name="OrderStatusID" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="OrderStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderDetail_tOrder">
+          <End Type="gardenartModel.tOrder" Role="tOrder" Multiplicity="1" />
+          <End Type="gardenartModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductPicture_tPicture">
+          <End Type="gardenartModel.tPicture" Role="tPicture" Multiplicity="1" />
+          <End Type="gardenartModel.tProductPicture" Role="tProductPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tProductPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetPicture_tPicture">
+          <End Type="gardenartModel.tPicture" Role="tPicture" Multiplicity="1" />
+          <End Type="gardenartModel.tSetPicture" Role="tSetPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tSetPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductAttributeValue_tProductAttribute">
+          <End Type="gardenartModel.tProductAttribute" Role="tProductAttribute" Multiplicity="1" />
+          <End Type="gardenartModel.tProductAttributeValue" Role="tProductAttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProductAttribute">
+              <PropertyRef Name="ProductAttributeID" />
+            </Principal>
+            <Dependent Role="tProductAttributeValue">
+              <PropertyRef Name="ProductAttributeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetDetail_tSet">
+          <End Type="gardenartModel.tSet" Role="tSet" Multiplicity="1" />
+          <End Type="gardenartModel.tSetDetail" Role="tSetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSet">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="tSetDetail">
+              <PropertyRef Name="SetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetPicture_tSet">
+          <End Type="gardenartModel.tSet" Role="tSet" Multiplicity="1" />
+          <End Type="gardenartModel.tSetPicture" Role="tSetPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSet">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="tSetPicture">
+              <PropertyRef Name="SetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tNewsItem">
+          <Key>
+            <PropertyRef Name="NewsItemID" />
+          </Key>
+          <Property Name="NewsItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tNewsItemPicture" Relationship="gardenartModel.FK_tNewsItemPicture_tNewsItem" FromRole="tNewsItem" ToRole="tNewsItemPicture" />
+        </EntityType>
+        <EntityType Name="tNewsItemPicture">
+          <Key>
+            <PropertyRef Name="NewsItemPictureID" />
+          </Key>
+          <Property Name="NewsItemPictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsItemID" Type="Int32" Nullable="false" />
+          <Property Name="PictureID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tNewsItem" Relationship="gardenartModel.FK_tNewsItemPicture_tNewsItem" FromRole="tNewsItemPicture" ToRole="tNewsItem" />
+          <NavigationProperty Name="tPicture" Relationship="gardenartModel.FK_tNewsItemPicture_tPicture" FromRole="tNewsItemPicture" ToRole="tPicture" />
+        </EntityType>
+        <Association Name="FK_tNewsItemPicture_tNewsItem">
+          <End Type="gardenartModel.tNewsItem" Role="tNewsItem" Multiplicity="1" />
+          <End Type="gardenartModel.tNewsItemPicture" Role="tNewsItemPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNewsItem">
+              <PropertyRef Name="NewsItemID" />
+            </Principal>
+            <Dependent Role="tNewsItemPicture">
+              <PropertyRef Name="NewsItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNewsItemPicture_tPicture">
+          <End Type="gardenartModel.tPicture" Role="tPicture" Multiplicity="1" />
+          <End Type="gardenartModel.tNewsItemPicture" Role="tNewsItemPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tNewsItemPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tFrame">
+          <Key>
+            <PropertyRef Name="FrameID" />
+          </Key>
+          <Property Name="FrameID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProduct_tFrame" FromRole="tFrame" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tSupplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Homepage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProduct_tSupplier" FromRole="tSupplier" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tWarehouse">
+          <Key>
+            <PropertyRef Name="WarehouseID" />
+          </Key>
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarehouseLocationID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Ordered" Type="Int32" Nullable="false" />
+          <Property Name="Available" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tWarehouseLocation" Relationship="gardenartModel.FK_tWarehouse_tWarehouseLocation" FromRole="tWarehouse" ToRole="tWarehouseLocation" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tWarehouse_tProduct" FromRole="tWarehouse" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tWarehouseLocation">
+          <Key>
+            <PropertyRef Name="WarehouseLocationID" />
+          </Key>
+          <Property Name="WarehouseLocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tWarehouse" Relationship="gardenartModel.FK_tWarehouse_tWarehouseLocation" FromRole="tWarehouseLocation" ToRole="tWarehouse" />
+        </EntityType>
+        <Association Name="FK_tWarehouse_tWarehouseLocation">
+          <End Type="gardenartModel.tWarehouseLocation" Role="tWarehouseLocation" Multiplicity="1" />
+          <End Type="gardenartModel.tWarehouse" Role="tWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseLocation">
+              <PropertyRef Name="WarehouseLocationID" />
+            </Principal>
+            <Dependent Role="tWarehouse">
+              <PropertyRef Name="WarehouseLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tFrameColor">
+          <Key>
+            <PropertyRef Name="FrameColorID" />
+          </Key>
+          <Property Name="FrameColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CssName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProduct_tFrameColor" FromRole="tFrameColor" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tMaterialColor">
+          <Key>
+            <PropertyRef Name="MaterialColorID" />
+          </Key>
+          <Property Name="MaterialColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CssName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProduct_tMaterialColor" FromRole="tMaterialColor" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tProductGroup">
+          <Key>
+            <PropertyRef Name="ProductGroupID" />
+          </Key>
+          <Property Name="ProductGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductGroupDetail" Relationship="gardenartModel.FK_tProductGroupDetail_tProductGroup" FromRole="tProductGroup" ToRole="tProductGroupDetail" />
+          <NavigationProperty Name="tProductGroupPicture" Relationship="gardenartModel.FK_tProductGroupPicture_tProductGroup" FromRole="tProductGroup" ToRole="tProductGroupPicture" />
+        </EntityType>
+        <EntityType Name="tProductGroupDetail">
+          <Key>
+            <PropertyRef Name="ProductGroupDetailID" />
+          </Key>
+          <Property Name="ProductGroupDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductGroupID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tProductGroup" Relationship="gardenartModel.FK_tProductGroupDetail_tProductGroup" FromRole="tProductGroupDetail" ToRole="tProductGroup" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProductGroupDetail_tProduct" FromRole="tProductGroupDetail" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tProductGroupPicture">
+          <Key>
+            <PropertyRef Name="ProductGroupPictureID" />
+          </Key>
+          <Property Name="ProductGroupPictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductGroupID" Type="Int32" Nullable="false" />
+          <Property Name="PictureID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tPicture" Relationship="gardenartModel.FK_tProductGroupPicture_tPicture" FromRole="tProductGroupPicture" ToRole="tPicture" />
+          <NavigationProperty Name="tProductGroup" Relationship="gardenartModel.FK_tProductGroupPicture_tProductGroup" FromRole="tProductGroupPicture" ToRole="tProductGroup" />
+        </EntityType>
+        <Association Name="FK_tProductGroupPicture_tPicture">
+          <End Type="gardenartModel.tPicture" Role="tPicture" Multiplicity="1" />
+          <End Type="gardenartModel.tProductGroupPicture" Role="tProductGroupPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPicture">
+              <PropertyRef Name="PictureID" />
+            </Principal>
+            <Dependent Role="tProductGroupPicture">
+              <PropertyRef Name="PictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupDetail_tProductGroup">
+          <End Type="gardenartModel.tProductGroup" Role="tProductGroup" Multiplicity="1" />
+          <End Type="gardenartModel.tProductGroupDetail" Role="tProductGroupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProductGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Principal>
+            <Dependent Role="tProductGroupDetail">
+              <PropertyRef Name="ProductGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupPicture_tProductGroup">
+          <End Type="gardenartModel.tProductGroup" Role="tProductGroup" Multiplicity="1" />
+          <End Type="gardenartModel.tProductGroupPicture" Role="tProductGroupPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProductGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Principal>
+            <Dependent Role="tProductGroupPicture">
+              <PropertyRef Name="ProductGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tCategoryType">
+          <Key>
+            <PropertyRef Name="CategoryTypeID" />
+          </Key>
+          <Property Name="CategoryTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCategory" Relationship="gardenartModel.FK_tCategory_tCategoryType" FromRole="tCategoryType" ToRole="tCategory" />
+        </EntityType>
+        <Association Name="FK_tCategory_tCategoryType">
+          <End Type="gardenartModel.tCategoryType" Role="tCategoryType" Multiplicity="0..1" />
+          <End Type="gardenartModel.tCategory" Role="tCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategoryType">
+              <PropertyRef Name="CategoryTypeID" />
+            </Principal>
+            <Dependent Role="tCategory">
+              <PropertyRef Name="CategoryTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tProductMaterial">
+          <Key>
+            <PropertyRef Name="ProductMaterialID" />
+          </Key>
+          <Property Name="ProductMaterialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tMaterial" Relationship="gardenartModel.FK_tProductMaterial_tMaterial" FromRole="tProductMaterial" ToRole="tMaterial" />
+          <NavigationProperty Name="tProduct" Relationship="gardenartModel.FK_tProductMaterial_tProduct" FromRole="tProductMaterial" ToRole="tProduct" />
+        </EntityType>
+        <Association Name="FK_tProductMaterial_tMaterial">
+          <End Type="gardenartModel.tMaterial" Role="tMaterial" Multiplicity="1" />
+          <End Type="gardenartModel.tProductMaterial" Role="tProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaterial">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="tProductMaterial">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="SupplierArticleNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GardenArtArticleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProductSizeWidth" Type="Int32" Nullable="false" />
+          <Property Name="ProductSizeHeight" Type="Int32" Nullable="false" />
+          <Property Name="ProductSizeDepth" Type="Int32" Nullable="false" />
+          <Property Name="PackageInfo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Package" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackageSize" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GrossWeight" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="NetWeight" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="ItemsPerContainer" Type="Int32" Nullable="false" />
+          <Property Name="VolumePerItem" Type="Decimal" Nullable="false" Precision="18" Scale="10" />
+          <Property Name="Factory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CostUSD" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PurchasePriceUSD" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SellingPriceDirectUSD20" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SellingPriceDirectUSD10" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SellingPriceWarehouseSEK" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FrameID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="SellingPriceConsumerSEK" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FrameColorID" Type="Int32" />
+          <Property Name="MaterialColorID" Type="Int32" />
+          <Property Name="ProductSizeInfo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCategory" Relationship="gardenartModel.FK_tProduct_tCategory" FromRole="tProduct" ToRole="tCategory" />
+          <NavigationProperty Name="tFrame" Relationship="gardenartModel.FK_tProduct_tFrame" FromRole="tProduct" ToRole="tFrame" />
+          <NavigationProperty Name="tFrameColor" Relationship="gardenartModel.FK_tProduct_tFrameColor" FromRole="tProduct" ToRole="tFrameColor" />
+          <NavigationProperty Name="tMaterialColor" Relationship="gardenartModel.FK_tProduct_tMaterialColor" FromRole="tProduct" ToRole="tMaterialColor" />
+          <NavigationProperty Name="tOrderDetail" Relationship="gardenartModel.FK_tOrderDetail_tProduct" FromRole="tProduct" ToRole="tOrderDetail" />
+          <NavigationProperty Name="tSupplier" Relationship="gardenartModel.FK_tProduct_tSupplier" FromRole="tProduct" ToRole="tSupplier" />
+          <NavigationProperty Name="tProductAttributeValue" Relationship="gardenartModel.FK_tProductAttributeValue_tProduct" FromRole="tProduct" ToRole="tProductAttributeValue" />
+          <NavigationProperty Name="tProductGroupDetail" Relationship="gardenartModel.FK_tProductGroupDetail_tProduct" FromRole="tProduct" ToRole="tProductGroupDetail" />
+          <NavigationProperty Name="tProductMaterial" Relationship="gardenartModel.FK_tProductMaterial_tProduct" FromRole="tProduct" ToRole="tProductMaterial" />
+          <NavigationProperty Name="tProductPicture" Relationship="gardenartModel.FK_tProductPicture_tProduct" FromRole="tProduct" ToRole="tProductPicture" />
+          <NavigationProperty Name="tSetDetail" Relationship="gardenartModel.FK_tSetDetail_tProduct" FromRole="tProduct" ToRole="tSetDetail" />
+          <NavigationProperty Name="tWarehouse" Relationship="gardenartModel.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
+        </EntityType>
+        <Association Name="FK_tProduct_tCategory">
+          <End Type="gardenartModel.tCategory" Role="tCategory" Multiplicity="0..1" />
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tFrame">
+          <End Type="gardenartModel.tFrame" Role="tFrame" Multiplicity="0..1" />
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFrame">
+              <PropertyRef Name="FrameID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="FrameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tFrameColor">
+          <End Type="gardenartModel.tFrameColor" Role="tFrameColor" Multiplicity="0..1" />
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFrameColor">
+              <PropertyRef Name="FrameColorID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="FrameColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tMaterialColor">
+          <End Type="gardenartModel.tMaterialColor" Role="tMaterialColor" Multiplicity="0..1" />
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaterialColor">
+              <PropertyRef Name="MaterialColorID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="MaterialColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderDetail_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tSupplier">
+          <End Type="gardenartModel.tSupplier" Role="tSupplier" Multiplicity="0..1" />
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSupplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductAttributeValue_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tProductAttributeValue" Role="tProductAttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductAttributeValue">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductGroupDetail_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tProductGroupDetail" Role="tProductGroupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductGroupDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductMaterial_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tProductMaterial" Role="tProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductMaterial">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductPicture_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tProductPicture" Role="tProductPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tProductPicture">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSetDetail_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tSetDetail" Role="tSetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tSetDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWarehouse_tProduct">
+          <End Type="gardenartModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="gardenartModel.tWarehouse" Role="tWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tWarehouse">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gardenartModelStoreContainer" CdmEntityContainer="Entities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="gardenartModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="gardenartModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="gardenartModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="gardenartModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gardenartModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="gardenartModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gardenartModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="gardenartModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="gardenartModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="tCategory">
+            <EntityTypeMapping TypeName="gardenartModel.tCategory">
+              <MappingFragment StoreEntitySet="tCategory">
+                <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCategoryPicture">
+            <EntityTypeMapping TypeName="gardenartModel.tCategoryPicture">
+              <MappingFragment StoreEntitySet="tCategoryPicture">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryPictureID" ColumnName="CategoryPictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomer">
+            <EntityTypeMapping TypeName="gardenartModel.tCustomer">
+              <MappingFragment StoreEntitySet="tCustomer">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMaterial">
+            <EntityTypeMapping TypeName="gardenartModel.tMaterial">
+              <MappingFragment StoreEntitySet="tMaterial">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrder">
+            <EntityTypeMapping TypeName="gardenartModel.tOrder">
+              <MappingFragment StoreEntitySet="tOrder">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderDetail">
+            <EntityTypeMapping TypeName="gardenartModel.tOrderDetail">
+              <MappingFragment StoreEntitySet="tOrderDetail">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderStatus">
+            <EntityTypeMapping TypeName="gardenartModel.tOrderStatus">
+              <MappingFragment StoreEntitySet="tOrderStatus">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPicture">
+            <EntityTypeMapping TypeName="gardenartModel.tPicture">
+              <MappingFragment StoreEntitySet="tPicture">
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductAttribute">
+            <EntityTypeMapping TypeName="gardenartModel.tProductAttribute">
+              <MappingFragment StoreEntitySet="tProductAttribute">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductAttributeID" ColumnName="ProductAttributeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductAttributeValue">
+            <EntityTypeMapping TypeName="gardenartModel.tProductAttributeValue">
+              <MappingFragment StoreEntitySet="tProductAttributeValue">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductAttributeID" ColumnName="ProductAttributeID" />
+                <ScalarProperty Name="ProductAttributeValueID" ColumnName="ProductAttributeValueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductPicture">
+            <EntityTypeMapping TypeName="gardenartModel.tProductPicture">
+              <MappingFragment StoreEntitySet="tProductPicture">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductPictureID" ColumnName="ProductPictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSet">
+            <EntityTypeMapping TypeName="gardenartModel.tSet">
+              <MappingFragment StoreEntitySet="tSet">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SetID" ColumnName="SetID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSetDetail">
+            <EntityTypeMapping TypeName="gardenartModel.tSetDetail">
+              <MappingFragment StoreEntitySet="tSetDetail">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SetID" ColumnName="SetID" />
+                <ScalarProperty Name="SetDetailID" ColumnName="SetDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSetPicture">
+            <EntityTypeMapping TypeName="gardenartModel.tSetPicture">
+              <MappingFragment StoreEntitySet="tSetPicture">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="SetID" ColumnName="SetID" />
+                <ScalarProperty Name="SetPictureID" ColumnName="SetPictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNewsItem">
+            <EntityTypeMapping TypeName="gardenartModel.tNewsItem">
+              <MappingFragment StoreEntitySet="tNewsItem">
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NewsItemID" ColumnName="NewsItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNewsItemPicture">
+            <EntityTypeMapping TypeName="gardenartModel.tNewsItemPicture">
+              <MappingFragment StoreEntitySet="tNewsItemPicture">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="NewsItemID" ColumnName="NewsItemID" />
+                <ScalarProperty Name="NewsItemPictureID" ColumnName="NewsItemPictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFrame">
+            <EntityTypeMapping TypeName="gardenartModel.tFrame">
+              <MappingFragment StoreEntitySet="tFrame">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FrameID" ColumnName="FrameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSupplier">
+            <EntityTypeMapping TypeName="gardenartModel.tSupplier">
+              <MappingFragment StoreEntitySet="tSupplier">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Homepage" ColumnName="Homepage" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tWarehouse">
+            <EntityTypeMapping TypeName="gardenartModel.tWarehouse">
+              <MappingFragment StoreEntitySet="tWarehouse">
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="Ordered" ColumnName="Ordered" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="WarehouseLocationID" ColumnName="WarehouseLocationID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tWarehouseLocation">
+            <EntityTypeMapping TypeName="gardenartModel.tWarehouseLocation">
+              <MappingFragment StoreEntitySet="tWarehouseLocation">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WarehouseLocationID" ColumnName="WarehouseLocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFrameColor">
+            <EntityTypeMapping TypeName="gardenartModel.tFrameColor">
+              <MappingFragment StoreEntitySet="tFrameColor">
+                <ScalarProperty Name="CssName" ColumnName="CssName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FrameColorID" ColumnName="FrameColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMaterialColor">
+            <EntityTypeMapping TypeName="gardenartModel.tMaterialColor">
+              <MappingFragment StoreEntitySet="tMaterialColor">
+                <ScalarProperty Name="CssName" ColumnName="CssName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaterialColorID" ColumnName="MaterialColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductGroup">
+            <EntityTypeMapping TypeName="gardenartModel.tProductGroup">
+              <MappingFragment StoreEntitySet="tProductGroup">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductGroupID" ColumnName="ProductGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductGroupDetail">
+            <EntityTypeMapping TypeName="gardenartModel.tProductGroupDetail">
+              <MappingFragment StoreEntitySet="tProductGroupDetail">
+                <ScalarProperty Name="ProductGroupID" ColumnName="ProductGroupID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductGroupDetailID" ColumnName="ProductGroupDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductGroupPicture">
+            <EntityTypeMapping TypeName="gardenartModel.tProductGroupPicture">
+              <MappingFragment StoreEntitySet="tProductGroupPicture">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="ProductGroupID" ColumnName="ProductGroupID" />
+                <ScalarProperty Name="ProductGroupPictureID" ColumnName="ProductGroupPictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCategoryType">
+            <EntityTypeMapping TypeName="gardenartModel.tCategoryType">
+              <MappingFragment StoreEntitySet="tCategoryType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductMaterial">
+            <EntityTypeMapping TypeName="gardenartModel.tProductMaterial">
+              <MappingFragment StoreEntitySet="tProductMaterial">
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductMaterialID" ColumnName="ProductMaterialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProduct">
+            <EntityTypeMapping TypeName="gardenartModel.tProduct">
+              <MappingFragment StoreEntitySet="tProduct">
+                <ScalarProperty Name="ProductSizeInfo" ColumnName="ProductSizeInfo" />
+                <ScalarProperty Name="MaterialColorID" ColumnName="MaterialColorID" />
+                <ScalarProperty Name="FrameColorID" ColumnName="FrameColorID" />
+                <ScalarProperty Name="SellingPriceConsumerSEK" ColumnName="SellingPriceConsumerSEK" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="FrameID" ColumnName="FrameID" />
+                <ScalarProperty Name="SellingPriceWarehouseSEK" ColumnName="SellingPriceWarehouseSEK" />
+                <ScalarProperty Name="SellingPriceDirectUSD10" ColumnName="SellingPriceDirectUSD10" />
+                <ScalarProperty Name="SellingPriceDirectUSD20" ColumnName="SellingPriceDirectUSD20" />
+                <ScalarProperty Name="PurchasePriceUSD" ColumnName="PurchasePriceUSD" />
+                <ScalarProperty Name="CostUSD" ColumnName="CostUSD" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="VolumePerItem" ColumnName="VolumePerItem" />
+                <ScalarProperty Name="ItemsPerContainer" ColumnName="ItemsPerContainer" />
+                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+                <ScalarProperty Name="PackageSize" ColumnName="PackageSize" />
+                <ScalarProperty Name="Package" ColumnName="Package" />
+                <ScalarProperty Name="PackageInfo" ColumnName="PackageInfo" />
+                <ScalarProperty Name="ProductSizeDepth" ColumnName="ProductSizeDepth" />
+                <ScalarProperty Name="ProductSizeHeight" ColumnName="ProductSizeHeight" />
+                <ScalarProperty Name="ProductSizeWidth" ColumnName="ProductSizeWidth" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GardenArtArticleNumber" ColumnName="GardenArtArticleNumber" />
+                <ScalarProperty Name="SupplierArticleNumber" ColumnName="SupplierArticleNumber" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

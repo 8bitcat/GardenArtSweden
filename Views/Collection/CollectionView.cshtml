@@ -1,0 +1,60 @@
+﻿@model GardenArt.ViewModels.SetDisplayViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutProduct.cshtml";
+    Page.Title = "Gardenart";
+}
+
+@section SideNavTop {
+    <li>Kollektioner</li>
+}
+
+@section SideNav {
+
+    @foreach (var item in Model.ListOfCollections.OrderBy(x => x.ProductCategoryName))
+    {
+        <li>
+            @Html.ActionLink(item.ProductCategoryName, "CollectionView", "Collection", new { id = item.ProductCategoryID }, null)
+        </li>
+
+    }
+
+}
+
+@section Headline {
+    <h3>Alla våra möbler</h3>
+}
+
+@section Content {
+
+    <ul class="small-block-grid-1 medium-block-grid-3">
+
+        @foreach (var item in Model.ProductsInSet)
+        {
+            <li>
+
+                <div class="product_box">
+
+                    <div class="product_image">
+
+                        <a href="@Url.Action("Article", "Product",new { id = item.ProductID })">
+                            <img alt="@item.ProductName" id="@item.ProductID" src="@item.ImgUrl" />
+                        </a>
+
+                    </div>
+
+                    <div class="product_text">
+                        <span class="product_name">
+                            @Html.ActionLink(item.ProductName +" " + item.ProductCategoryName, "Article", "Product", new { id = item.ProductCategoryID }, null)
+                         </span>
+                    </div>
+
+                </div>
+
+            </li>
+
+        }
+
+    </ul>
+}

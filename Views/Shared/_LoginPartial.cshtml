@@ -1,0 +1,33 @@
+﻿@if (Request.IsAuthenticated)
+{
+
+    <div style="float:left">
+        Hej, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+    </div>
+
+    <div style="float:left">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">&nbsp;&nbsp;Logga ut</a>
+        }
+    </div>
+    <div style="float:left">
+        @if (Roles.IsUserInRole("admin"))
+        {
+            <a href="http://www.gardenartsweden.se/Admin/">&nbsp;&nbsp;Administrera</a>
+        }
+    </div>
+
+}
+else
+{
+    <nav class="top-bar" data-topbar>
+        <section class="top-bar-section">
+            <ul class="left-small">
+                <li>@Html.ActionLink("Registera", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        </section>
+    </nav>
+    }

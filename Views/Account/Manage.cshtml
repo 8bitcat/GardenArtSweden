@@ -1,0 +1,49 @@
+﻿@model GardenArt.Models.LocalPasswordModel
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutTwoColumn.cshtml";
+    Page.Title = "Gardenart";
+}
+
+
+@section TopSideNav {
+    <li>Kontakta oss</li>
+}
+
+@section SideNav {
+    <li><a href="~/Contact/Contact">Kontakta Gardenart</a></li>
+    <li><a href="~/Wholesaler/Index">Våra återförsäljare</a></li>
+}
+
+@section Headline {
+
+    <h3>Hantera användarkonto</h3>
+
+}
+
+@section ContentLeft {
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>Du är inloggad som användare: <strong>@User.Identity.Name</strong>.</p>
+
+@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{
+    @Html.Partial("_SetPasswordPartial")
+}
+
+}
+
+@section ContentRight {
+
+    <img src="~/Images/Site/15.png" style="margin-top:20px;" />
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

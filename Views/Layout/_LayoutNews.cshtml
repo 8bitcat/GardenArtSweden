@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/foundation/css/foundation.css" />
+    <link rel="stylesheet" href="~/Content/foundation/css/app.css" />
+    <link rel="stylesheet" href="~/Content/foundation/css/button.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif|Carme' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+
+    <div class="row" id="wrapper">
+
+        <!--HEADER-->
+        @RenderPage("~/Views/Layout/_Header.cshtml")
+
+        <!-- Content nestled grids-->
+        <div class="row">
+
+            <div class="medium-3 columns hide-for-small-only">
+
+                <!-- Infälld -->
+                <ul class="side-nav-top">
+                    @RenderSection("TopSideNav", required: true) <!-- Generera för varje sida  -->
+                </ul>
+
+                <!-- Utfälld -->
+                <ul class="side-nav">
+                    @RenderSection("SideNav", required: false)<!-- Generera för varje sida  -->
+                </ul>
+
+                <div class="row">
+                </div>
+            </div>
+
+            <!--Headline-->
+            <div class="small-12 medium-9 columns">
+                @RenderSection("Headline")
+
+                <div class="row">
+
+                    <div class="small-12 columns hide-for-medium-up">@RenderSection("MobileNav", required: false)</div>
+                    <!--Content-->
+
+                    <div class="medium-12 columns">
+                        <div>
+                            @RenderSection("Content")
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--FOOTER-->
+        @RenderPage("~/Views/Layout/_Footer.cshtml")
+
+    </div>
+    <script src="~/Content/foundation/js/vendor/modernizr.js"></script>
+    <script src="~/Content/foundation/js/vendor/jquery.js"></script>
+    <script src="~/Content/foundation/js/vendor/fastclick.js"></script>
+    <script src="~/Content/foundation/js/foundation/foundation.js"></script>
+    <script src="~/Content/foundation/js/foundation/foundation.orbit.js"></script>
+    <script src="~/Content/foundation/js/foundation/foundation.topbar.js"></script>
+    <script src="~/Scripts/LinkActive.js"></script>
+    <script>
+        //Add topbar to the document!
+        $(document).foundation();
+    </script>
+</body>
+</html>

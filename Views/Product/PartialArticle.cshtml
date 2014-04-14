@@ -1,0 +1,13 @@
+﻿@model GardenArt.ViewModels.ArticleDisplayViewModel
+
+
+@if (User.IsInRole("admin"))
+{ 
+    <p class="another_title">Detaljerad produktfakta</p>
+    <p class="article_text">Artikelnr: @Model.ProductContainer.MotherProduct.GardenArtArticleNumber</p>
+    <p class="article_text">Antal/förpackning: @Model.ProductContainer.MotherProduct.PackageInfo</p>
+    <p class="article_text">Antal per container(40 fot): @Model.ProductContainer.MotherProduct.ItemsPerContainer </p>
+    <p class="article_text">Antal på lager: Ej tillgängligt</p>
+    <p class="article_text">Försäljningspris USD: @Model.ProductContainer.MotherProduct.SellingPriceDirectUSD20</p>
+    <p class="article_text">Försäljningspris från lager SEK: @Model.ProductContainer.MotherProduct.SellingPriceWarehouseSEK</p>
+}

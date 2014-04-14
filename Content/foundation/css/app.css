@@ -1,0 +1,526 @@
+/* Foundation overrides */
+
+/*
+    font-family: 'PT Sans', sans-serif;
+    font-family: 'Droid Serif', serif;
+    font-family: 'Carme', sans-serif;
+    font-family: 'Actor', sans-serif;
+*/
+
+body {
+    background-color: #D6EAE2;
+    font-family: 'Carme', sans-serif;
+    color: #2C2C2C;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Droid Serif", "Helvetica", Helvetica, Arial, sans-serif;
+    color: #475A04;
+    text-rendering: optimizeLegibility;
+}
+
+    h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+        font-size: 60%;
+        color: #475A04;
+        line-height: 0;
+    }
+
+p {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 0.90rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    color: #438167;
+    text-decoration: none;
+    line-height: inherit;
+}
+
+    a:hover, a:focus {
+        color: #438167;
+    }
+
+    a img {
+        border: none;
+    }
+
+ul,
+ol,
+dl {
+    font-size: 0.90rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    list-style-position: outside;
+    font-family: inherit;
+}
+
+img {
+    margin-bottom: 10px;
+}
+
+/* Foundation side-nav overrides */
+
+.side-nav {
+    display: block;
+    margin: 0;
+    padding: 10px 15px 5px 15px;
+    list-style-type: none;
+    list-style-position: inside;
+    font-family: inherit;
+    color: #244C3A;
+    background: -webkit-linear-gradient(#D6EAE2, #f1f6f4); /* For Safari */
+    background: -o-linear-gradient(#D6EAE2, #ffffff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#D6EAE2, #ffffff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#D6EAE2, #f1f6f4); /* Standard syntax */
+}
+
+    .side-nav li {
+        margin: 0 0 0.4375rem 0;
+        font-size: 0.875rem;
+    }
+
+        .side-nav li a:not(.button) {
+            display: block;
+            color: #438167;
+        }
+
+            .side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {
+                color: #244C3A;
+            }
+
+        .side-nav li.active > a:first-child:not(.button) {
+            color: #438167;
+            font-weight: normal;
+            font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+        }
+
+        .side-nav li.divider {
+            border-top: 1px solid;
+            height: 0;
+            padding: 0;
+            list-style: none;
+            border-top-color: white;
+        }
+
+
+/*Alternative side-nav*/
+
+.side-nav-top {
+    display: block;
+    margin: 10px 0 0 0;
+    list-style-type: none;
+    list-style-position: inside;
+    font-family: inherit;
+    background-color: #93B0A4;
+    color: #fff;
+    padding: 8px 10px 2px 10px;
+}
+
+    .side-nav-top li {
+        margin: 0 0 0.4375rem 0;
+        font-size: 1rem;
+    }
+
+        .side-nav-top li a {
+            color: #fff;
+            text-decoration: none;
+            line-height: inherit;
+        }
+
+        .side-nav-top li.active > a:first-child {
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .side-nav-top li.divider {
+            border-top: 1px solid;
+            height: 0;
+            padding: 0;
+            list-style: none;
+            border-top-color: white;
+        }
+
+/*Top bar overrides*/
+
+.contain-to-grid {
+    width: 100%;
+    background: #fff;
+}
+
+.top-bar-section ul li > a {
+    display: block;
+    width: 100%;
+    color: #2C2C2C;
+    padding: 12px 0 12px 0;
+    padding-left: 15px;
+    font-family: "Carme", "Helvetica", Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: normal;
+    background: #ffffff;
+}
+
+.top-bar-section ul li.active > a {
+    background: white;
+    font-weight: normal;
+    color: #475A04;
+}
+
+.top-bar-section ul li:hover > a {
+    background: #fff;
+    color: #475A04;
+}
+
+    .top-bar-section ul li:hover > a:not(.button) {
+        background: #fff;
+        color: #475A04;
+    }
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+    background: #fff;
+    color: #475A04;
+}
+
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+    color: #475A04;
+    background: #fff;
+}
+    /*  Ändrat till #fff  */
+
+    .top-bar-section li.active:not(.has-form) a:not(.button):hover {
+        background: #fff;
+        color: #475A04;
+    }
+
+
+/*/*Centered top bar
+.top-bar-section ul {
+    display: table;
+    margin: 0 auto;
+}
+
+    .top-bar-section ul li {
+        display: table-cell;
+    }*/
+
+
+/* Blockquotes overrides*/
+blockquote {
+    margin: 0 0 1.25rem;
+    padding: 0.5625rem 1.25rem 0 1.1875rem;
+    border-left: 1px solid #dddddd;
+}
+
+    blockquote cite {
+        display: block;
+        font-size: 0.8125rem;
+        color: #555555;
+    }
+
+        blockquote cite:before {
+            content: "\2014 \0020";
+        }
+
+        blockquote cite a,
+        blockquote cite a:visited {
+            color: #555555;
+        }
+
+    blockquote,
+    blockquote p {
+        line-height: 1.6;
+        color: #6f6f6f;
+    }
+
+
+/*defined non-foundation classes*/
+
+.slogan {
+    background-color: #D6EAE2;
+    line-height: 1.4;
+    text-align: center;
+    color: #475A04;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: thin #93B0A4;
+}
+
+
+/*blandade textstilar*/
+.alttext {
+    font-family: "Carme", "Helvetica", Helvetica, Arial, sans-serif;
+    color: #475A04;
+    margin-bottom: 2px;
+}
+
+
+
+.another_title {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.ingress {
+    color: #555555;
+}
+
+
+/*produkt-item på produktsidan*/
+
+.product_box {
+    width: 225px;
+    background-color: #fff;
+}
+
+.product_image {
+    width: 225px;
+    height: 225px;
+}
+
+    .product_image:hover {
+        background: #dddddd;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        opacity: 0.4;
+    }
+
+.product_name {
+    color: #475A04;
+    font-size: 0.90rem;
+}
+
+    .product_name a, a:visited {
+        color: #475A04;
+    }
+
+        .product_name a:hover {
+            color: #1e2603;
+        }
+
+.product_text {
+    width: 250px;
+    height: 60px;
+    color: #475A04;
+    padding: 10px;
+}
+
+/*kollektion-item på kollektionssidan*/
+
+.collection_box {
+    width: 250px;
+    background-color: #fff;
+}
+
+.collection_name {
+    color: #475A04;
+    font-size: 0.90rem;
+}
+
+    .collection_name a, a:visited {
+        color: #475A04;
+    }
+
+        .collection_name a:hover {
+            color: #1e2603;
+        }
+
+.collection_text {
+    margin-top: 15px;
+    width: 225px;
+    height: 30px;
+    color: #475A04;
+    padding: 10px;
+}
+
+.collection_image {
+    width: 250px;
+    height: 154px;
+}
+
+    .collection_image:hover {
+        background: #dddddd;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        opacity: 0.8;
+    }
+
+
+/*Nyhets-item på nyheter*/
+
+.newstitle {
+    font-size: 1.5rem;
+    font-variant-caps: all-small-caps;
+    margin-bottom: 5px;
+    color: #475A04;
+}
+
+.newsdate {
+    font-family: "Carme", "Helvetica", Helvetica, Arial, sans-serif;
+    color: #475A04;
+    margin-bottom: 5px;
+}
+
+.newsitem {
+    clear: both;
+}
+
+.newsimage {
+    width: 250px;
+    height: 250px;
+    float: left;
+    padding: 10px;
+}
+
+/*Artikelsida*/
+
+.article_collection {
+    margin-bottom: 1px;
+}
+
+.article_nav {
+    padding: 20px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.article_text {
+    margin-bottom: 2px;
+
+}
+
+.colors {
+    padding: 0;
+}
+
+.color {
+    width: 50px;
+    height: 50px;
+    background-color: #f1f6f4;
+    margin: 2px;
+}
+
+/* MATERIAL COLORS */
+.taupe{
+     width: 50px;
+     height: 50px;
+     background-color: #3D362D;
+     margin: 2px;
+}
+.svart{
+     width: 50px;
+     height: 50px;
+     background-color: #000000;
+     margin: 2px;
+}
+.gra{
+     width: 50px;
+     height: 50px;
+     background-color: #C0C0C0;
+     margin: 2px;
+}
+.vit{
+     width: 50px;
+     height: 50px;
+     background-color: #F5F5F5;
+     margin: 2px;
+     border: 1px solid #e6e6e6;
+}
+.cappuccino{
+     width: 50px;
+     height: 50px;
+     background-color: #AF8E45;
+     margin: 2px;
+}
+.khaki{
+     width: 50px;
+     height: 50px;
+     background-color: #f0e68c;
+     margin: 2px;
+}
+.teak{
+     width: 50px;
+     height: 50px;
+     background-color: #AE8F60;
+     margin: 2px;
+}
+.khaki-brush{
+     width: 50px;
+     height: 50px;
+     background-color: #BDB76B;
+     margin: 2px;
+}
+.stone-Gray{
+     width: 50px;
+     height: 50px;
+     background-color: #8B8D7A;
+     margin: 2px;
+}
+.graphic-grey{
+     width: 50px;
+     height: 50px;
+     background-color: #474a51;
+     margin: 2px;
+}
+/*FRAME COLORS*/
+
+.champagne
+{
+     width: 50px;
+     height: 50px;
+     background-color: #F7E7CE;
+     margin: 2px;
+}
+
+.charcoal
+{
+     width: 50px;
+     height: 50px;
+     background-color: #222222;
+     margin: 2px;
+}
+
+.rostfritt
+{
+     width: 50px;
+     height: 50px;
+     background-color: #E0DFDB;
+     margin: 2px;
+}
+
+.farg-saknas {
+
+    width: 50px;
+     height: 50px;
+     background-image:url('../../../Images/farg-saknas.png');
+     margin: 2px;
+}
+
+
+/*defined selectors*/
+
+#topnav {
+    margin-top: 100px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+#logo {
+    padding-left: 50px;
+    padding-bottom: 20px;
+}
+
+#logo_small {
+    padding-left: 20px;
+    margin-bottom: -80px;
+    width: 50%;
+    height: 50%;
+}
+
+#wrapper {
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    padding: 20px 40px 20px 40px;
+}

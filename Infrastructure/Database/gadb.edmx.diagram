@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acc20d475d01484aaef35c82f8527f08" Name="Diagram1" ZoomLevel="50">
+        <EntityTypeShape EntityType="gardenartModel.tCategory" Width="1.5" PointX="0.5" PointY="6.625" />
+        <EntityTypeShape EntityType="gardenartModel.tCategoryPicture" Width="1.5" PointX="2.75" PointY="6.5" />
+        <EntityTypeShape EntityType="gardenartModel.tCustomer" Width="1.5" PointX="3.5" PointY="13" />
+        <EntityTypeShape EntityType="gardenartModel.tMaterial" Width="1.5" PointX="3.5" PointY="3.75" />
+        <EntityTypeShape EntityType="gardenartModel.tOrder" Width="1.5" PointX="10.5" PointY="12.875" />
+        <EntityTypeShape EntityType="gardenartModel.tOrderDetail" Width="1.5" PointX="8" PointY="9.5" />
+        <EntityTypeShape EntityType="gardenartModel.tOrderStatus" Width="1.5" PointX="3.5" PointY="16.625" />
+        <EntityTypeShape EntityType="gardenartModel.tPicture" Width="1.5" PointX="0.5" PointY="3.625" />
+        <EntityTypeShape EntityType="gardenartModel.tProductAttribute" Width="1.5" PointX="8.75" PointY="0.625" />
+        <EntityTypeShape EntityType="gardenartModel.tProductAttributeValue" Width="1.5" PointX="11" PointY="2.5" />
+        <EntityTypeShape EntityType="gardenartModel.tProductPicture" Width="1.5" PointX="8" PointY="6.5" />
+        <EntityTypeShape EntityType="gardenartModel.tSet" Width="1.5" PointX="0.75" PointY="12.875" />
+        <EntityTypeShape EntityType="gardenartModel.tSetDetail" Width="1.5" PointX="11" PointY="6.375" />
+        <EntityTypeShape EntityType="gardenartModel.tSetPicture" Width="1.5" PointX="11" PointY="10" />
+        <AssociationConnector Association="gardenartModel.FK_tCategoryPicture_tCategory" />
+        <AssociationConnector Association="gardenartModel.FK_tCategoryPicture_tPicture" />
+        <AssociationConnector Association="gardenartModel.FK_tOrder_tCustomer" />
+        <AssociationConnector Association="gardenartModel.FK_tOrder_tOrderStatus" />
+        <AssociationConnector Association="gardenartModel.FK_tOrderDetail_tOrder" />
+        <AssociationConnector Association="gardenartModel.FK_tProductPicture_tPicture" />
+        <AssociationConnector Association="gardenartModel.FK_tSetPicture_tPicture" />
+        <AssociationConnector Association="gardenartModel.FK_tProductAttributeValue_tProductAttribute" />
+        <AssociationConnector Association="gardenartModel.FK_tSetDetail_tSet" />
+        <AssociationConnector Association="gardenartModel.FK_tSetPicture_tSet" />
+        <EntityTypeShape EntityType="gardenartModel.tNewsItem" Width="1.5" PointX="0.625" PointY="0.75" />
+        <EntityTypeShape EntityType="gardenartModel.tNewsItemPicture" Width="2" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="gardenartModel.FK_tNewsItemPicture_tNewsItem" />
+        <AssociationConnector Association="gardenartModel.FK_tNewsItemPicture_tPicture" />
+        <EntityTypeShape EntityType="gardenartModel.tFrame" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="gardenartModel.tSupplier" Width="1.5" PointX="5.625" PointY="13.75" />
+        <EntityTypeShape EntityType="gardenartModel.tWarehouse" Width="1.5" PointX="7.625" PointY="12.75" />
+        <EntityTypeShape EntityType="gardenartModel.tWarehouseLocation" Width="1.5" PointX="9.5" PointY="16.25" />
+        <AssociationConnector Association="gardenartModel.FK_tWarehouse_tWarehouseLocation" />
+        <EntityTypeShape EntityType="gardenartModel.tFrameColor" Width="1.5" PointX="3.5" PointY="22.5" />
+        <EntityTypeShape EntityType="gardenartModel.tMaterialColor" Width="1.5" PointX="3.5" PointY="20" />
+        <EntityTypeShape EntityType="gardenartModel.tProductGroup" Width="1.5" PointX="3.5" PointY="10.375" />
+        <EntityTypeShape EntityType="gardenartModel.tProductGroupDetail" Width="1.5" PointX="13.375" PointY="8.125" />
+        <EntityTypeShape EntityType="gardenartModel.tProductGroupPicture" Width="1.5" PointX="5.75" PointY="0.75" />
+        <AssociationConnector Association="gardenartModel.FK_tProductGroupPicture_tPicture" />
+        <AssociationConnector Association="gardenartModel.FK_tProductGroupDetail_tProductGroup" />
+        <AssociationConnector Association="gardenartModel.FK_tProductGroupPicture_tProductGroup" />
+        <EntityTypeShape EntityType="gardenartModel.tCategoryType" Width="1.5" PointX="1.25" PointY="16" />
+        <AssociationConnector Association="gardenartModel.FK_tCategory_tCategoryType" />
+        <EntityTypeShape EntityType="gardenartModel.tProductMaterial" Width="1.5" PointX="9.25" PointY="3.375" />
+        <AssociationConnector Association="gardenartModel.FK_tProductMaterial_tMaterial" />
+        <EntityTypeShape EntityType="gardenartModel.tProduct" Width="1.5" PointX="5.625" PointY="3.375" />
+        <AssociationConnector Association="gardenartModel.FK_tProduct_tCategory" />
+        <AssociationConnector Association="gardenartModel.FK_tProduct_tFrame" />
+        <AssociationConnector Association="gardenartModel.FK_tProduct_tFrameColor" />
+        <AssociationConnector Association="gardenartModel.FK_tProduct_tMaterialColor" />
+        <AssociationConnector Association="gardenartModel.FK_tOrderDetail_tProduct" />
+        <AssociationConnector Association="gardenartModel.FK_tProduct_tSupplier" />
+        <AssociationConnector Association="gardenartModel.FK_tProductAttributeValue_tProduct" />
+        <AssociationConnector Association="gardenartModel.FK_tProductGroupDetail_tProduct" />
+        <AssociationConnector Association="gardenartModel.FK_tProductMaterial_tProduct" />
+        <AssociationConnector Association="gardenartModel.FK_tProductPicture_tProduct" />
+        <AssociationConnector Association="gardenartModel.FK_tSetDetail_tProduct" />
+        <AssociationConnector Association="gardenartModel.FK_tWarehouse_tProduct" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

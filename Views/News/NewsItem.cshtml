@@ -1,0 +1,62 @@
+﻿@model GardenArt.ViewModels.NewsOneViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutNews.cshtml";
+    ViewBag.Title = "Gardenart Sweden";
+}    
+
+@section TopSideNav {
+    <li>Månad-År</li>
+}
+
+@section SideNav {
+
+    @foreach (var item in Model.ListOfNews)
+    {
+        <li>
+            @item.Key
+        </li>
+        foreach (var inne in item.Select(x => x))
+        {
+            <li>
+                @Html.ActionLink(inne.Title.Max24Chars() + " \r\n " + inne.DateCreated.ToString("yyyy-MM-dd"), "newsitem", new { id = inne.NewsItemID.ToString() })
+            </li>
+        }
+    }
+
+}
+
+@section Headline {
+
+    <h3 style="margin-bottom:20px">Nyheter</h3>
+
+}
+
+@section Content {
+
+
+            <p class="newstitle">@Model.OneNewsById.NewsTitle</p>
+
+            <p class="newsdate">
+                Publicerad: @Model.OneNewsById.NewsCreated.ToLongDateString().UpperCaseFirst()
+            </p>
+
+            <p>
+                <span style="white-space: pre-line">@Model.OneNewsById.NewsText</span>
+            </p>
+
+            <p>
+                @foreach (string bilden in Model.OneNewsById.Newspicture)
+                {
+                   <img src="@bilden" />
+                }
+               
+            </p>
+
+
+
+   
+
+
+}

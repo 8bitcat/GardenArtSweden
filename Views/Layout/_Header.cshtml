@@ -1,0 +1,67 @@
+﻿<!-- Header and Nav -->
+
+<div class="row">
+
+    <div class="row">
+        
+        <div class="small-12 columns hide-for-large-up" id="logo_small">
+            <a href="~/Home/Index"><img src="~/Images/Site/GA-logo-low.png" /></a>
+        </div>
+
+        <div class="large-3 columns hide-for-medium-down" id="logo">
+
+            <a href="~/Home/Index"><img src="~/Images/Site/GA-logo-low.png" /></a>
+
+        </div>
+
+
+        <div class="small-12 large-9 columns" id="topnav">
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name"></li>
+                    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+
+                </ul>
+
+                <section class="top-bar-section">
+                    <ul class="left-small">
+                        <li id="home" class="has-dropdown">
+                            <a href="~/Home/About">Gardenart</a>
+                            <ul class="dropdown hide-for-medium-up">
+                                <li><a href="~/Home/About">Om Gardenart</a></li>
+                                <li><a href="~/Home/History">Historia</a></li>
+                                <li><a href="~/Home/New">En ny generation trädgårdsmöbler</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li id="collection"><a href="~/Collection/Collections">Kollektioner</a></li>
+                        <li class="divider"></li>
+                        <li id="product"><a href="~/Product/Products">Möbler</a></li>
+                        <li class="divider"></li>
+                        <li id="news"><a href="~/News/">Nyheter</a></li>
+                        <li class="divider"></li>
+                        
+                        <li id="wholesaler" class="has-dropdown">
+                            <a href="~/Wholesaler/">Återförsäljare</a>
+                            <ul class="dropdown hide-for-medium-up">
+                                <li><a href="~/Account/login">Logga in</a></li>
+                                <li><a href="~/Account/Register">Registrera konto</a></li>
+                                <li>
+                                    @if (Roles.IsUserInRole("admin"))
+                                    {
+                                        <a href="http://www.gardenartsweden.se/Admin/">Administrera</a>
+                                    }
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li id="contact"><a href="~/Contact/Contact">Kontakta oss</a></li>
+
+                    </ul>
+                </section>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- End Header and Nav -->

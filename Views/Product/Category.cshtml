@@ -1,0 +1,66 @@
+﻿@model GardenArt.ViewModels.ProductCategoryViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutProduct.cshtml";
+    ViewBag.Title = "Gardenart Sweden";
+}
+
+@section SideNavTop {
+    <li>Möbler</li>
+}
+
+@section SideNav {
+
+    @foreach(var item in Model.ListOfCategories)
+    {
+         <li>
+             @Html.ActionLink(item.ProductCategoryName, "category", new { id = item.ProductCategoryID })
+        </li>
+        
+    }
+   
+
+}
+
+@section MobileNav {
+    <div class="small-12 columns hide-for-medium-up">
+        <dl class="sub-nav">
+            <dt>Filter:</dt>
+            <dd class="active"><a href="#">Alla</a></dd>
+            <dd><a href="#">Stolar</a></dd>
+            <dd><a href="#">Bord</a></dd>
+            <dd><a href="#">Soffor</a></dd>
+            <dd><a href="#">Louge och Relax</a></dd>
+            <dd><a href="#">Bistro</a></dd>
+            <dd><a href="#">Bar</a></dd>
+            <dd><a href="#">Småbord och tillbehör</a></dd>
+        </dl>
+    </div>
+}
+
+@section Content {
+   <ul class="small-block-grid-1 medium-block-grid-3">
+       @foreach (var item in Model.ListOfProductsFromCategory)
+       {
+           <li>
+               <div class="article_box">
+
+                   <div class="article_image">
+
+                       <a href="@Url.Action("Article", new { id = item.ProductID })">
+                           <img alt="@item.ProductName" id="@item.ProductID" src="@item.ImgUrl" />
+                       </a>
+
+                   </div>
+
+                   <div class="article_text">
+                       <span class="article_name">@Html.ActionLink(@item.ProductName, "Article", new { id = item.ProductID })</span>
+                   </div>
+
+               </div>
+           </li>
+        }
+    </ul>
+
+}

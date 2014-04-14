@@ -1,0 +1,50 @@
+﻿@model GardenArt.Infrastructure.Uploaders.PictureUploader
+
+@{
+    ViewBag.Title = "ImageUpload";
+    Layout = "~/Views/Layout/_LayoutThreeColumn.cshtml";
+}
+
+<h2>ImageUpload</h2>
+
+<h2>Index</h2>
+@section TopSideNav {
+    <li>Admin</li>
+}
+
+@section SideNav {
+    <li><a href="~/Admin/ProductChecker">Kontrollera Produkter</a></li>
+    <li><a href="~/Admin/ImageUpload">Ladda upp bilder</a></li>
+}
+
+
+@section Headline {
+
+    <h3 style="margin-bottom:20px">Ladda upp produktbilder!</h3>
+
+}
+
+@section ContentLeft {
+    
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+       
+        @ViewBag.AntalBilder 
+        @Html.ValidationMessageFor(model => model.image)
+        @Html.TextBoxFor(model => model.image, new { type = "file", accept = "image/*", multiple = "multiple" })
+        <input type="submit" value="Ladda upp bilder!" />
+    }
+
+
+}
+
+@section ContentMiddle {
+
+
+
+}
+
+@section ContentRight {
+
+
+}

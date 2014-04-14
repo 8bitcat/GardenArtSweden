@@ -1,0 +1,87 @@
+﻿@model  GardenArt.Models.LoginModel
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutTwoColumn.cshtml";
+    Page.Title = "Gardenart";
+}
+
+
+@section TopSideNav {
+    <li>Kontakta oss</li>
+}
+
+@section SideNav {
+    <li><a href="~/Contact/Contact">Kontakta Gardenart</a></li>
+    <li><a href="~/Wholesaler/Index">Våra återförsäljare</a></li>
+}
+
+@section Headline {
+
+    <h3>Logga in</h3>
+
+}
+
+@section ContentLeft {
+
+<section id="loginForm">
+    
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Inloggningsformulär</legend>
+            <ul class="side-nav">
+                <li>
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+                <li>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                </li>
+            </ul>
+            <input type="submit" value="Logga in!" />
+        </fieldset>
+        <p>
+            @Html.ActionLink("Registera", "Register") om du inte har ett konto.
+        </p>
+    }
+</section>
+
+
+}
+
+@section ContentRight {
+
+    <img src="~/Images/Site/15.png" style="margin-top:20px;" />
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

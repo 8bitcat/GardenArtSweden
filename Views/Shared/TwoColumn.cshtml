@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="Content/foundation/css/foundation.css" />
+    <link rel="stylesheet" href="Content/foundation/css/app.css" />
+    <link rel="stylesheet" href="Content/foundation/css/button.css" />
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700|Merriweather:400,700|Merriweather+Sans:400' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+
+    <div class="row" id="wrapper">
+
+        <!-- Header and Nav -->
+
+        <div class="row">
+
+            <div class="row">
+                <div class="large-centered large-3 columns" id="logo"><img src="img/logo.png" /></div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="contain-to-grid">
+                <div class="large-centered large-9 columns" id="topnav">
+                    <nav class="top-bar" data-topbar>
+                        <ul class="title-area">
+                            <li class="name"></li>
+                            <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+                        </ul>
+
+                        <section class="top-bar-section">
+                            <ul>
+                                <li><a href="#">Startsida</a></li>
+                                <li class="divider"></li>
+                                <li class="active"><a href="#">Gardenart</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Nyheter</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Produkter</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Återförsäljare</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Kontakt</a></li>
+                            </ul>
+                        </section>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- End Header and Nav -->
+        <!-- Content nestled grids-->
+        <div class="row">
+            <div class="large-3 columns">
+
+                <!-- Infälld -->
+                <ul class="side-nav-top">
+                    <li><a href="#">Sida</a></li>
+                </ul>
+
+                <!-- Utfälld -->
+                <ul class="side-nav">
+                    <li><a href="#">Alternativ 1</a></li>
+                    <li><a href="#">Alternativ 2</a></li>
+                </ul>
+
+                <div class="row">
+                </div>
+            </div>
+
+            <!--Headline-->
+            <div class="large-9 columns">
+                @RenderSection("Headline")
+                <div class="row">
+
+                    <!--Content-->
+                    <div class="large-6 columns">
+                        <div>
+                            @RenderSection("ContentLeft")
+                        </div>
+
+                    </div>
+
+                    <!--Content-->
+                    <div class="large-6 columns">
+                        <div>
+                            @RenderSection("ContentRight")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Footer -->
+
+        <footer class="row">
+            <div class="large-12 columns">
+                <hr />
+                <div class="row">
+                    <div class="large-6 columns">
+                        <p>Gardenart</p>
+                    </div>
+                    <div class="large-6 columns">
+                        <ul class="inline-list right">
+                            <li><a href="#">Kontakta oss</a></li>
+                            <li><a href="#">Återförsäljare</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+﻿@{
+    ViewBag.Title = "Order";
+}
+
+<link rel="stylesheet" href="Content/progressbar.css" />
+<script type="text/javascript" src="Scripts/progressbar.js"></script>
+
+<script>
+
+    var progressBar;
+
+window.onload  = function()
+{
+
+    progressBar = new ProgressBar("my-progressbar", { 'width': '545px', 'height': '20px' });
+
+    progressBarItem = {};
+    progressBarItem[ProgressBar.OPTION_NAME.ITEM_ID] = "progress";
+    progressBarItem[ProgressBar.OPTION_NAME.TYPE] = ProgressBar.OPTION_VALUE.TYPE.BAR;
+    progressBarItem[ProgressBar.OPTION_NAME.OPACITY] = 1.0;
+    progressBarItem[ProgressBar.OPTION_NAME.SPACE] = 0;
+    progressBarItem[ProgressBar.OPTION_NAME.ALIGN] = ProgressBar.OPTION_VALUE.ALIGN.LEFT;
+    progressBarItem[ProgressBar.OPTION_NAME.POSITION] = ProgressBar.OPTION_VALUE.POSITION.RELATIVE;
+    progressBarItem[ProgressBar.OPTION_NAME.COLOR_ID] = ProgressBar.OPTION_VALUE.COLOR_ID.GREEN;
+    progressBarItem[ProgressBar.OPTION_NAME.PERCENT] = 0;
+    progressBar.createItem(progressBarItem);
+
+    progressBarItem = {};
+    progressBarItem[ProgressBar.OPTION_NAME.ITEM_ID] = "lineMax";
+    progressBarItem[ProgressBar.OPTION_NAME.TYPE] = ProgressBar.OPTION_VALUE.TYPE.LINE;
+    progressBarItem[ProgressBar.OPTION_NAME.ALIGN] = ProgressBar.OPTION_VALUE.ALIGN.LEFT;
+    progressBarItem[ProgressBar.OPTION_NAME.COLOR_ID] = ProgressBar.OPTION_VALUE.COLOR_ID.RED;
+    progressBarItem[ProgressBar.OPTION_NAME.PERCENT] = 90;
+    progressBar.createItem(progressBarItem);
+
+    //Event listener: CHANGED
+    progressBar.getElement().addEventListener(ProgressBar.EVENT.CHANGED,
+        function ($event) {
+
+            //Show total percent
+            var totalPercent = $event.detail.me.getPercent('progress');
+
+            var lblProgressbarInfoText = document.getElementById("lblProgressbarInfoText");
+
+            var pbarItems = progressBar.getElement().getElementsByTagName("div");
+            var pbarItem = pbarItems[0];
+
+            if (totalPercent <= 50)
+                pbarItem.setAttribute("class", "item-bar green");
+            else if (totalPercent < 90)
+                pbarItem.setAttribute("class", "item-bar yellow");
+            else
+                pbarItem.setAttribute("class", "item-bar red");
+
+            lblProgressbarInfoText.innerHTML = "Container filled to " + totalPercent + "%";
+        });
+
+    document.productCounter = 0;
+
+    var furnitureSelect = document.getElementById("ddlFurnitureTypeList");
+    var furnitureSelectModel = document.getElementById("ddlFurnitureModelList");
+    var imgAddToOrder = document.getElementById("imgAddToOrder");
+
+    furnitureSelect.setAttribute("style", "width: 260px;");
+    furnitureSelectModel.setAttribute("style", "width: 260px;");
+
+    furnitureSelect.onchange = GetModelsJson;
+    furnitureSelectModel.onchange = GetFurnitureInfo;
+
+    createEmptyProductTable();
+
+    var order = [
+    {
+        "NumberOfProducts": 0,
+        "TotalFullContainer": 0,
+        "TotalPrice": 0,
+        "OrderID": null,
+        "Products": []
+    }];
+
+    function GetModelsJson()
+	{
+	    //Vi kör en jquery... ;)
+	    //Lite om EcmaScript "javascript".... Keywordet "This" har en lite annorlunda funktion än vad vi är vana vid sedan .NET
+	    //This har alltid den contexten att det utgår ifrån den kallande objektet
+	    //Exempel överst ligger document i vårt fall det globala objektet, sedan skapar vi furnitureSelect
+	    // och sist men inte minst är vi i den anonyma funktionen som kör vid eventet
+	    //sett på djupet är det  document --> furnitureSelect --> function(e)
+	    //det betyder att furniture select är "pappa" till den anonyma funktionen och därmed är det context this kommer att ha.
+        //Kanske ni redan visste men det är lätt att glömma att det inte pekar globalt.
+
+            ajaxCallWrapper('Order/AjaxAnswerJson', "#ddlFurnitureTypeList", addModels);
+    }
+
+    function GetFurnitureInfo() {
+        if (this.value == "0") { return true };
+        ajaxCallWrapper('Order/AjaxProductBuilderJson', "#ddlFurnitureModelList", buildProduct);
+    }
+
+    function SendOrder() {
+        var emailTo = prompt("Please enter e-mail address.", "team@9bitninjas.com");
+
+        if (emailTo)
+        {
+            var products = [];
+
+            $.each(order.Products, function (key, product) {
+                var orderDetailModel = {
+                    OrderDetailID: product.OrderDetailID,
+                    OrderID: product.OrderID,
+                    ProductID: product.ProductID,
+                    Quantity: product.Quantity,
+                    FullContainer: product.FullContainer,
+                    Price: product.Price,
+                    ItemNumber: product.ItemNumber
+                };
+
+                products.push(orderDetailModel);
+            });
+
+            var orderModel = {
+                OrderID: order.OrderID, NumberOfProducts: order.NumberOfProducts,
+                TotalFullContainer: order.TotalFullContainer, TotalPrice: order.TotalPrice,
+                Products: products, EmailToAddress: emailTo
+            };
+
+            $.ajax({
+                dataType: "json",
+                contentType: 'application/json',
+                type: 'POST',
+                url: 'Order/AjaxSendOrderJson',
+                data: JSON.stringify(orderModel),
+                success: OrderSent
+            });
+        }
+    }
+
+    function OrderSent(data) {
+        alert(data);
+    }
+
+    function ajaxCallWrapper(url, dataElementToSearialize, onSuccessFunction) {
+        $.ajax({
+            dataType: "json", //LAGT TILL TYPEN! INNAN VAR DET INGEN... DÅ KOLLAR MAN PÅ MIME TYPEN AUTOMAGISKT... SÅNT GILLAR VI INTE!
+            type: 'POST',
+            // url: 'Order/AjaxAnswerTest', HÄR BYTER JAG BARA TILL JSON METODEN
+            url: url,//'Order/AjaxAnswerJson',
+            data: $(dataElementToSearialize).serialize(),  //JSON.stringify({ModelType: this.value})
+            success: onSuccessFunction//function (data) {
+
+            //Hämta andra listan!
+
+            //}
+        });
+
+    }
+
+    function addModels(data) {
+        // Dölj add-knappen
+        imgAddToOrder.style.visibility = "hidden";
+
+        //Tömmer tabellen från rader
+        $("#productTable").remove();
+
+        createEmptyProductTable();
+
+        //Fetcha Elementet!
+        var dropListModels = $("#ddlFurnitureModelList");
+
+        //Rensa den ifall det har skett laddningar innan
+        $(dropListModels).empty()
+
+            //Jquery's for each loop 
+        $(document.createElement('option'))
+            .attr('value', "0")
+            .text('----- Select item -----')
+            .appendTo(dropListModels);
+
+            $.each(data, function (arrayIndex, dataJson) {
+                //skapa en option alltså valet i selectboxen
+                $(document.createElement('option'))
+                    .attr('value', dataJson.Value) //attr sätter ett attribut, plocka ur datan ur vårt objekt
+                    .text(dataJson.Text) //sätter texten plocka ur datan ur vårt objekt
+                    .appendTo(dropListModels); //lägg till den till vår select!
+            }); //End each!
+
+        //alert(data);
+    }
+
+    function createEmptyProductTable() {
+        //Skapa upp tabellen
+        $(document.createElement('table'))
+            .appendTo(divProductInfo)
+            .attr({ id: "productTable" });
+
+        var row = $('<tr><td style="white-space: nowrap; vertical-align: top;"><b>Item number</b></td></tr>');
+        $("#productTable").append(row);
+
+        row = $('<tr><td style="white-space: nowrap; vertical-align: top;"><b>Price</b></td></tr>');
+        $("#productTable").append(row);
+
+        row = $('<tr><td style="white-space: nowrap; vertical-align: top;"><b>Full container</b></td></tr>');
+        $("#productTable").append(row);
+
+        row = $('<tr><td style="white-space: nowrap; vertical-align: top;"><b>Description</b></td></tr>');
+        $("#productTable").append(row);
+
+        // Visa "tom" bild
+        divProductImage.innerHTML = '<br /><div style="width: 124px; text-align: right;"><img id="picture" src="../Images/noimage.gif" style="box-shadow: 3px 3px 2px #888888;" /></div>';
+    }
+
+    function buildProduct(data)
+    {
+        var orderDetail = [
+        {
+            "OrderDetailID": null,
+            "OrderID": null,
+            "ProductID": null,
+            "Quantity": 1,
+            "FullContainer": null,
+            "Price": null,
+            "ItemNumber": null
+        }];
+
+        //Tömmer tabellen från rader
+        $("#productTable").remove();
+
+        var divProductImage = document.getElementById("divProductImage");
+
+        //Hämtar elementet
+        var divProductInfo = $("#divProductInfo");
+
+        //Skapa upp tabellen
+        $(document.createElement('table'))
+            .appendTo(divProductInfo)
+            .attr({ id: "productTable"});
+
+        //Loopa över objektets alla properties
+        for (var property in data[0]) {
+
+            if (data[0].hasOwnProperty(property)) {
+                //Kolla om vi är på Picture propertyt
+                if (property == "Picture")
+                {
+                    //Skapa en tabellrad, innehållandes en TD med ett uppräknat id(behövs inte nu längre när vi bara visar en produkt);
+                    //TODO Tabort dynamisk counter.
+                    //var row = $("<tr>" +
+                    //                '<td style="vertical-align: top;">' + property + '</td>' +
+                    //                '<td id="furniturepicture"></td>' +
+                    //            '</tr>');
+
+                    //$("#productTable").append(row);
+                       
+                    //skapa en sträng för ID:et på elementet
+                    //var elementet = "pic" + document.imageCounter;
+                    // ' + document.imageCounter + '
+
+                    //OKEJ Magnus K, på din begäran har Jquery åkt ut.. ;)
+                    //Jag är emot två saker.. att bränna böcker och att kasta färdigskriven kod... 
+                    //så jag kommenterar ut den. Du får se det fungera med vanligt javascript!
+
+                    var imageFile = data[0][property].toString();
+
+                    if (imageFile.localeCompare("../Images/Products/") == 0) {
+                        imageFile = "../Images/noimage.gif";
+                    }
+
+                    //JAVASCRIPT
+                    //Hämta elementet, fyll det med följande html sträng.
+                    divProductImage.innerHTML = '<br /><div style="width: 124px; text-align: right;"><img id="picture" src="' + imageFile + '" style="box-shadow: 3px 3px 2px #888888;" /></div>';
+                    //document.getElementById("furniturepicture").innerHTML = '<img id="picture" src="' + imageFile + '" />';
+
+                    //Kod för att ändra storleken på bilden
+                    //Kommenterar ut den så länge.
+                    //var theImg = document.getElementById('picture');
+                    //theImg.height = 100;
+                    //theImg.width = 100;
+
+                    /* JQUERY 
+                    $('<img />')
+                        .attr('src', data[0][property])
+                        .append(testDiv)
+                        .load(function () {
+                        alert('image added');
+                    });
+                    */
+                }
+                else if (property == "ProductID") { orderDetail.ProductID = data[0][property]; }
+                else {
+                    var propertyValue = data[0][property];
+
+                    switch (property) {
+                        case "ProductID": orderDetail.ProductID = propertyValue;
+                            break;
+                        case "Price": orderDetail.Price = propertyValue; propertyValue = FormatNumber(propertyValue);
+                            break;
+                        case "ItemNumber": orderDetail.ItemNumber = propertyValue; property = "Item number";
+                            break;
+                        case "FullContainer": orderDetail.FullContainer = propertyValue; property = "Full container";
+                            break;
+                    }
+
+                    var row = $("<tr>" +
+                                   '<td style="white-space: nowrap; vertical-align: top;"><b>' + property + "</b></td>" +
+                                    "<td>" + propertyValue + "</td>" +
+                                "</tr>");
+
+                    $("#productTable").append(row);
+                }
+            }
+
+            // Dölj add-knappen
+            imgAddToOrder.style.visibility = "visible";
+        }
+
+        imgAddToOrder.onclick = function () {
+            if (order.Products == null) {
+                orderDetail.Quantity = 1;
+                order.Products = new Array(orderDetail);
+            }
+            else {
+                var i = FindIndexByKey(order.Products, "ProductID", orderDetail.ProductID);
+
+                // Kolla om produkt redan finns.
+                if (i == null) {
+                    orderDetail.Quantity = 1;
+                    order.Products.push(orderDetail);
+                }
+                else {
+                    order.Products[i].Quantity++
+                }
+            }
+
+            BuildOrderTable();
+        };
+    }
+
+    function FindIndexByKey(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key] == value) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    function BuildOrderTable() {
+        //Tömmer ordertabellen från rader
+        $("#orderTable").remove();
+
+        //Tömmer summeringstabellen från rader
+        $("#summaryTable").remove();
+
+        order.NumberOfProducts = 0;
+
+        // Hämta div som ordertabellen ska ligga i
+        var divOrderInfo = $("#divOrderInfo");
+
+        if (order.Products.length > 0) {
+            //Skapa upp tabellen
+            $(document.createElement('table'))
+                .appendTo(divOrderInfo)
+                .attr({ id: "orderTable", width: "545px" });
+
+            //var orderTable = document.getElementById("orderTable");
+
+            // Skapa header
+            var row = $('<tr>' +
+                            '<th style="width: 200px">Item Number</th>' +
+                            '<th style="width: 100px">Price (unit)</th>' +
+                            '<th style="width: 60px">Quantity</th>' +
+                            '<th></th>' +
+                        '</tr>');
+
+            $("#orderTable").append(row);
+
+            order.TotalPrice = 0;
+            order.TotalFullContainer = 0;
+
+            for (var i in order.Products) {
+                orderDetail = order.Products[i];
+
+                order.NumberOfProducts += orderDetail.Quantity;
+                order.TotalPrice += (orderDetail.Price * orderDetail.Quantity);
+                order.TotalFullContainer += (orderDetail.Quantity / orderDetail.FullContainer);
+
+                row = $('<tr class="color_tr">' +
+                            '<td>' + orderDetail.ItemNumber + '</td>' +
+                            '<td>' + FormatNumber(orderDetail.Price) + '</td>' +
+                            '<td>' +
+                                '<input type="number" min="1" ' +
+                                    'style="width: 60px" id="txtQuantity_' + orderDetail.ProductID +
+                                    '" value="' + orderDetail.Quantity + '">' +
+                            '</td>' +
+                            '<td style="text-align: right;">' +
+                                '<img id="imgRemoveItem_' + orderDetail.ProductID + '" src="../Images/remove.png" onmouseover="" style="cursor: pointer; width: 30px; height: 30px;" />' +
+                            '</td>' +
+                        '</tr>');
+
+                $("#orderTable").append(row);
+
+                var removeId = "imgRemoveItem_" + orderDetail.ProductID;
+                var imgRemoveItem = document.getElementById(removeId);
+
+                imgRemoveItem.onclick = function () {
+                    var split = this.id.split("_");
+                    var productId = split[1];
+
+                    var i = FindIndexByKey(order.Products, "ProductID", productId);
+
+                    order.Products.splice(i, 1);
+
+                    BuildOrderTable();
+                }
+
+                var quantityId = "txtQuantity_" + orderDetail.ProductID;
+                var txtQuantity = document.getElementById(quantityId);
+
+                txtQuantity.onchange = function () {
+                    var txtQuantity = this;
+
+                    if (Number(txtQuantity.value) > 0) {
+                        txtQuantity.style.border = "";
+
+                        document.latestActiveTextBoxId = txtQuantity.id;
+
+                        var split = txtQuantity.id.split("_");
+                        var productId = split[1];
+
+                        var i = FindIndexByKey(order.Products, "ProductID", productId);
+
+                        order.Products[i].Quantity = txtQuantity.value;
+
+                        BuildOrderTable();
+                    }
+                    else {
+                        txtQuantity.style.border = "solid red 1px";
+                    }
+                }
+
+                txtQuantity.onkeyup = txtQuantity.onchange;
+            }
+
+            var fullContainerPercent = order.TotalFullContainer * 100;
+            progressBar.setPercent(fullContainerPercent);
+
+            var divOrderSummary = $("#divOrderSummary");
+
+            $(document.createElement('table'))
+                .appendTo(divOrderSummary)
+                .attr({id: "summaryTable", width: "545px"})
+
+            //var summaryTable = document.getElementById("summaryTable");
+
+            var row = $('<tr>' +
+                            '<th style="width: 200px; vertical-align: mid;">Total price:</th>' +
+                            '<th style="width: 100px; vertical-align: mid;">' + FormatNumber(order.TotalPrice) + '</th>' +
+                            '<th style="width: 60px; vertical-align: mid;"></th>' +
+                            '<th style="width: 200px; vertical-align: mid; text-align: right;"><input type="button" id="btnSendOrder" value="Send order" style="margin: 0 0 0 0;"></input></th>' +
+                        '</tr>');
+            $("#summaryTable").append(row);
+
+            var btnSendOrder = document.getElementById("btnSendOrder");
+            btnSendOrder.onclick = SendOrder;
+        }
+        else {
+            // Inga produkter i listan
+            progressBar.setPercent(0);
+        }
+    }
+
+    function FormatNumber(value) {
+        var ret = ((value == null) ? "0" : value);
+        return ret.toFixed(2);
+    }
+};
+    </script>
+
+<h2>@ViewBag.Title</h2>
+
+@model GardenArt.Models.OrderModels
+
+<div id="all">
+    <div id="divDropDownLists" style="height: 209px; width: 545px;">
+        <table>
+            <tr>
+                <td style="text-align: center">@(Html.DropDownList("ddlFurnitureTypeList", Model.DropDownList, "----- Select type -----"))</td>
+                <td style="text-align: center">@(Html.DropDownList("ddlFurnitureModelList", Enumerable.Empty<SelectListItem>(), "----- Select item -----"))</td>
+                <td style="text-align: center"><img id="imgAddToOrder" src="../Images/add.png" onmouseover="" style="cursor: pointer; width: 30px; height: 30px; visibility: hidden;" /></td>
+            </tr>
+        </table>
+
+        <div id="divProductInfo" style="height: 175px; width: 420px; float: left;"></div>
+        <div id="divProductImage" style="height: 175px; margin-left: 420px;"></div>
+    </div>
+
+    <div id="divOrderInfo"></div>
+    <br />
+    <div id="divOrderSummary" style="height: 30px;"></div>
+    <br />
+    <div id="divProgressbar" style="height: 60px; width: 545px;">
+        <div id="my-progressbar" style="top: 18px; position: relative;"></div>
+        <div id="lblProgressbarInfoText" style="top: -4px; z-index: 1; position: relative; width: 545px; text-align: center;">0%</div>
+    </div>
+</div>

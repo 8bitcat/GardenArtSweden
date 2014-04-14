@@ -1,0 +1,88 @@
+﻿@model GardenArt.ViewModels.NewsDisplayViewModel
+
+<!DOCTYPE html>
+@{
+    Layout = "~/Views/Layout/_LayoutNews.cshtml";
+    ViewBag.Title = "Gardenart Sweden";
+}
+
+@section MobileNav {
+    <dl class="sub-nav">
+        @foreach (var item in Model.ListOfNews)
+        {
+            <dd>
+                @item.Key
+            </dd>
+
+        }
+    </dl>
+}
+
+@section TopSideNav {
+    <li>Nyheter</li>
+}
+
+@section SideNav {
+
+    @foreach (var item in Model.ListOfNews)
+    {
+        <li>
+            » @item.Key
+        </li>
+        foreach (var inne in item.Select(x => x))
+        {
+            <li>
+                @Html.ActionLink(inne.Title.Max24Chars() + " \r\n " + inne.DateCreated.ToString("yyyy-MM-dd"), "newsitem", new { id = inne.NewsItemID.ToString() })
+            </li>
+        }
+    }
+
+}
+
+}
+
+@section Headline {
+
+    <h3 style="margin-bottom:20px">Nyheter</h3>
+
+}
+
+@section Content {
+
+
+
+    @foreach (var item in Model.ListOfNews)
+    {
+
+        foreach (var inne in item.Select(x => x))
+        {
+            <div class="newsitem">
+                <p class="newstitle">@inne.Title</p>
+
+                <p class="newsdate">
+                    Publicerad: @inne.DateCreated.ToLongDateString().UpperCaseFirst()
+                </p>
+
+                <p>
+                    <span style="white-space: pre-line">@inne.Text</span>
+            </p>
+
+            </div>
+
+            foreach (var bilden in inne.tNewsItemPicture.Select(x => x))
+            {
+                <div class="newsimage">
+                    <img src="@bilden.tPicture.Picture" />
+                </div>
+
+            }
+
+
+
+        }
+    }
+
+
+
+
+}

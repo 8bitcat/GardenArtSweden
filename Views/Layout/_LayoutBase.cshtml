@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/foundation/css/foundation.css" />
+    <link rel="stylesheet" href="~/Content/foundation/css/app.css" />
+    <link rel="stylesheet" href="~/Content/foundation/css/button.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif|Carme' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+    <div class="row" id="wrapper">
+
+        <!--HEADER-->
+        @RenderPage("~/Views/Layout/_Header.cshtml")
+        <!--CONTENT-->
+        @RenderSection("Content")
+
+        <!--FOOTER-->
+        @RenderPage("~/Views/Layout/_Footer.cshtml")
+
+    </div>
+    
+    <!-- Initialize Foundation!  -->
+    <script src="~/Content/foundation/js/vendor/modernizr.js"></script>
+    <script src="~/Content/foundation/js/vendor/jquery.js"></script>
+    <script src="~/Content/foundation/js/vendor/fastclick.js"></script>
+    <script src="~/Content/foundation/js/foundation/foundation.js"></script>
+    <script src="~/Content/foundation/js/foundation/foundation.orbit.js"></script>
+    <script src="~/Content/foundation/js/foundation/foundation.topbar.js"></script>
+    <script src="~/Scripts/LinkActive.js"></script>
+    <script>
+        //Add orbit to the document!
+        $(document).foundation({
+            orbit: {
+            animation: 'slide',
+            timer_speed: 10000,
+            pause_on_hover: false,
+            animation_speed: 500,
+            navigation_arrows: true,
+            bullets: true
+        }
+        });
+            
+          
+  
+        // probably needs to be massaged to extract just the path so that it works in dev/prod
+
+        
+
+    </script>
+</body>
+</html>
